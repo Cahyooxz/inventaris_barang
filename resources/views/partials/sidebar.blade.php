@@ -9,9 +9,15 @@
               Admin Elements
           </li> --}}
           <li class="sidebar-item">
-              <a href="#" class="sidebar-link">
+              <a href="{{ route('dashboard') }}" class="sidebar-link">
                   <i class="fa-solid fa-list pe-2"></i>
                   Dashboard
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="{{ route('users.index') }}" class="sidebar-link">
+                <i class="fa-regular fa-user pe-2"></i>
+                  Users
               </a>
           </li>
           <li class="sidebar-item">

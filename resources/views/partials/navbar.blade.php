@@ -6,8 +6,7 @@
       <ul class="navbar-nav d-flex">
           <li class="nav-item dropdown">
               <a href="#" data-bs-toggle="dropdown" class="nav-icon text-light pe-md-0">
-                {{ $user }}
-                <img src="../image/profile.jpg" class="ms-3 avatar img-fluid rounded" alt="">
+                <img src="{{ asset('image/profile.jpg') }}" class="ms-3 avatar img-fluid rounded" alt="">
               </a>
               <div class="dropdown-menu dropdown-menu-end">
                   <a href="#" class="dropdown-item"><i class="bi bi-person-fill me-3"></i>Profile</a>

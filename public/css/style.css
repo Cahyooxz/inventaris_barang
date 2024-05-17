@@ -49,6 +49,7 @@ h4 {
 }
 .btn-b{
     background-color: #27374D;
+    font-size: 16px;
 }
 .btn-b:hover{
     background-color: #4b596d;
@@ -131,7 +132,6 @@ a.sidebar-link {
     max-width: 100vw;
     width: 100vw;
 }
-
 @media (min-width:768px) {
     .content {
         max-width: auto;

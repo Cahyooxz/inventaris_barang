@@ -16,10 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user()->name;
-        $data = User::all();
         return view('dashboard',[
             'user' => $user,
-            'data' => $data
         ]);
     }
     public function download(){
