@@ -5,39 +5,44 @@
           <a href="#">CV Ogah Rugi</a>
       </div>
       <ul class="sidebar-nav">
-          {{-- <li class="sidebar-header">
-              Admin Elements
-          </li> --}}
           <li class="sidebar-item">
               <a href="{{ route('dashboard') }}" class="sidebar-link">
                   <i class="fa-solid fa-list pe-2"></i>
                   Dashboard
               </a>
           </li>
+          @if(auth()->user()->hasRole('admin'))
           <li class="sidebar-item">
               <a href="{{ route('users.index') }}" class="sidebar-link">
-                <i class="fa-regular fa-user pe-2"></i>
+                <i class="bi bi-people-fill pe-2"></i>
                   Users
               </a>
           </li>
+          @endif
           <li class="sidebar-item">
-              <a href="#" class="sidebar-link">
-                <i class="fa-solid fa-cart-shopping pe-2"></i>
-                  Data Pembelian
+              <a href="{{ route('barang.index') }}" class="sidebar-link">
+                <i class="fa-solid fa-box pe-2"></i>
+                  Data Barang
               </a>
           </li>
           <li class="sidebar-item">
               <a href="#" class="sidebar-link collapsed" data-bs-target="#pages"
-                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
-                  Pages
+                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-people-carry-box pe-2"></i>
+                  Transaksi
               </a>
               <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Page 1</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Page 2</a>
-                  </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('pembelian.index') }}" class="sidebar-link">
+                      <i class="fa-solid fa-cart-shopping pe-2"></i>
+                        Data Pembelian
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-people-carry-box pe-2"></i>
+                        Data Peminjaman
+                    </a>
+                </li>
               </ul>
           </li>
           <li class="sidebar-item">

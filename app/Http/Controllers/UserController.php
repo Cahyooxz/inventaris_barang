@@ -6,9 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -18,6 +20,9 @@ class UserController extends Controller
         return view('user.index',[
             'data' => $data,
         ]);
+    }
+    public function download(){
+        return Excel::download(new UsersExport, 'user.xlsx');
     }
 
     /**
@@ -47,7 +52,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
 
@@ -107,6 +112,7 @@ class UserController extends Controller
             'username' => $request->username,
             'role' => $request->role,
         ]);
+
         if($user->update()){
             if($user->role === 'admin'){
                 $user->syncRoles('admin');

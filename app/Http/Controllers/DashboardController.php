@@ -20,9 +20,6 @@ class DashboardController extends Controller
             'user' => $user,
         ]);
     }
-    public function download(){
-        return Excel::download(new UsersExport, 'user.xlsx');
-    }
 
     /**
      * Show the form for creating a new resource.
