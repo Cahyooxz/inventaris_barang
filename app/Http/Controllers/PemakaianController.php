@@ -89,11 +89,17 @@ class PemakaianController extends Controller
     public function edit(string $id)
     {
         $data = Pemakaian::findOrFail($id);
-        $user_tes = User::select('id', 'name')->where('id', $data->peminjam)->first();
-        $user = User::select('id','name','role')->get();
-        $barang = Barang::select('kode_barang','nama_barang','merk','jumlah')->where('kode_barang', $data->kode_barang)->get();   
-        
-        return view('pemakaian.pemakaian_edit');
+        $user = User::select('id', 'name','role')->where('id', $data->pemakai)->first();
+        $user_all = User::select('id', 'name','role')->whereNot('id', $data->pemakai)->whereNot('role', 'petugas')->get();
+
+        $barang = Barang::select('kode_barang','nama_barang','merk','jumlah')->where('kode_barang', $data->kode_barang)->first(); 
+
+        return view('pemakaian.pemakaian_edit',[
+            'data' => $data,
+            'user' => $user,
+            'user_all' => $user_all,
+            'barang' => $barang,
+        ]);
     }
 
     /**
@@ -101,7 +107,33 @@ class PemakaianController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $data = Pemakaian::findOrFail($id);
+        $barang = Barang::where('kode_barang', $data->kode_barang)->first();
+
+        $barang->update([
+            'jumlah' => $barang->jumlah + $data->jumlah,
+        ]);
+
+
+        $this->validate($request,[
+            'kode_barang' => 'required',
+            'pemakai' => 'required',
+            'jumlah' => 'required|integer',
+            'tanggal' => 'required',
+        ]);
+            
+        // Menambahkan jumlah barang berdasarkan permintaan yang baru
+        $barang->update([
+            'jumlah' => $barang->jumlah - $request->jumlah,
+        ]);
+
+        $data->update([
+            'kode_barang' => $request->kode_barang,
+            'pemakai' => $request->pemakai,
+            'jumlah' => $request->jumlah,
+            'tanggal' => $request->tanggal,
+        ]);
+        return redirect()->route('pemakaian.index')->with('success-update', 'Data berhasil diedit');
     }
 
     /**
@@ -116,7 +148,7 @@ class PemakaianController extends Controller
         if($barang->jumlah){
             $barang->save();
             $data->delete();
-            return redirect()->route('pemakaian.index')->with('success-update', 'Data barang berhasil diedit');
+            return redirect()->route('pemakaian.index')->with('success-delete', 'Data barang berhasil diedit');
         }
     }
 }

@@ -22,6 +22,14 @@ a {
 .bg-gray{
     background-color: #526D82;
 }
+.text-gray{
+    color: #526D82;
+}
+.a-icon{
+    font-size: 70px;
+    padding: 0;
+    margin: 0;
+}
 
 li {
     list-style: none;

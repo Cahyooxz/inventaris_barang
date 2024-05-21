@@ -8,31 +8,34 @@
                 </h5>
                 <form action="{{ route('pemakaian.update', ['id' => $data->id]) }}" method="POST">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <div class="container-fluid">
                         <div class="row">
-                          <div class="col-12">
-                            <label for="nama_barang" class="fw-medium mb-2 mt-2">Nama Barang</label>
-                            <select name="kode_barang" id="" class="form-select mb-3">
-                                <option value="{{ $data->kode_barang }}">{{ $data->nama_barang }} - {{ $data->merk }}</option>
+                            <div class="col-12">
+                                <label for="nama_barang" class="fw-medium mb-2 mt-2">Nama Barang</label>
+                                <select name="kode_barang" id="" class="form-select mb-3">
+                                    <option value="{{ $data->kode_barang }}">{{ $barang->nama_barang }} | {{ $barang->merk }}</option>
                             </select>
                           </div>
                           <div class="col-12">
-                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Pemakaian</label>
-                            <select name="peminjam" id="peminjam" class="form-select mb-3">
-                                <option value="{{ $data->id }}">{{ $data->name }} - {{ $data->role }}</option>
+                            <label for="pemakai" class="fw-medium mb-2 mt-2">Nama Pemakaian</label>
+                            <select name="pemakai" id="pemakai" class="form-select mb-3">
+                                <option value="{{ $data->pemakai }}">{{ $user->name }} - {{ $user->role }}</option>
+                                @foreach ($user_all as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->role }}</option>
+                                @endforeach
                             </select>
                           </div>
                           <div class="col-12">
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
-                            <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
-                                value="{{ old('jumlah') }}">
+                            <input type="number" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
+                                value="{{ $data->jumlah }}">
                             @error('jumlah')
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
                             <label for="tanggal" class="fw-medium mb-2 mt-2">Tanggal</label>
                             <input type="date" name="tanggal" class="form-control mb-3" placeholder="Tanggal"
-                                value="{{ old('tanggal') }}">
+                                value="{{ $data->tanggal }}">
                             @error('tanggal')
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror

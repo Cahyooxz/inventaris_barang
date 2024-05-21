@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
+use App\Models\Barang;
 use App\Models\BarangPembelian;
+use App\Models\Pemakaian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +35,7 @@ class DashboardController extends Controller
 
         // menghitung selisih antara kedua waktu bulan ini dan kemarin
         $total = $totalPembelian - $totalPembelianLalu;
-        if($total !=0){
+        if($totalPembelianLalu !=0){
             if($total >0){
                 $status = 'naik';
                 $persen = ($total / $totalPembelianLalu) * 100;
@@ -44,14 +46,29 @@ class DashboardController extends Controller
             }
         } else{
             $status = 'tidak berubah';
+            $persen = 0;
         }
         $persen_format = number_format($persen, 2);
+
+        $users = User::count();
+        $barangs = Barang::count();
+        $pengembelians = BarangPembelian::count();
+        $pemakaians = Pemakaian::count();
+
+        $data = ([
+            'user' => $users,
+            'barang' => $barangs,
+            'pembelian' => $pengembelians,
+            'pemakaian' => $pemakaians,
+        ]);
+
         return view('dashboard',[
             'user' => $user,
             'total_pembelian' => $totalPembelian,
             'total_lalu' => $totalPembelianLalu,
             'status' => $status,
             'persen' => $persen_format,
+            'data' => $data,
         ]);
     }
 

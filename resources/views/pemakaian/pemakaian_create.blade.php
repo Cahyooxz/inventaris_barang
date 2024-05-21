@@ -19,6 +19,9 @@
                                     <option value="{{ $d->kode_barang }}">{{ $d->nama_barang }} - {{ $d->merk }}</option>
                                 @endforeach
                             </select>
+                            @error('kode_barang')
+                            <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                            @enderror
                           </div>
                           <div class="col-12">
                             <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Pemakai</label>
@@ -28,11 +31,17 @@
                                 <option value="{{ $d->id }}">{{ $d->name }} - {{ $d->role }}</option>
                                 @endforeach
                             </select>
+                            @error('pemakai')
+                            <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                            @enderror
                           </div>
                           <div class="col-12">
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
                             <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
                                 value="{{ old('jumlah') }}">
+                            @error('jumlah')
+                            <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                            @enderror
                             @if(session('fail-pemakaian'))
                             <small class="text-danger mb-3 d-block">Stok barang yang tersisa hanya {{ (session('jumlah_barang')) }}</small>
                             @endif

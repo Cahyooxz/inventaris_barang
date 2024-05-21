@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PemakaianController;
+use App\Http\Controllers\DataPembelian;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
