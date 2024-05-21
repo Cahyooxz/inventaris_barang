@@ -35,7 +35,7 @@ class BarangController extends Controller
     {
         $this->validate($request,[
             'kode_barang' => 'required|min:5|unique:barang',
-            'nama_barang' => 'required',
+            'nama_barang' => 'required|unique:barang',
             'jenis_barang' => 'required',
             'merk' => 'required',
             'jumlah' => 'required',
@@ -72,24 +72,42 @@ class BarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Barang $barang)
+    public function edit(string $id)
     {
-        //
+        $data = Barang::findOrFail($id);
+        return view('barang.barang_edit', [
+            'data' => $data,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, string $id)
     {
-        //
+        $barang = Barang::findOrFail($id);
+
+        $this->validate($request,[
+            'harga' => 'required|integer',
+        ]);
+        
+        $barang_update = $barang->update([
+            'harga' => $request->harga,
+        ]);
+
+        if($barang_update){
+            return redirect()->route('barang.index')->with('success-update', 'Data berhasil diedit');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Barang $barang)
+    public function destroy(string $id)
     {
-        //
+        $data = Barang::findOrFail($id);
+        $data->delete();
+
+        return redirect()->route('barang.index')->with('success-delete', 'Data berhasil dihapus');
     }
 }

@@ -4,29 +4,28 @@
         <div class="card border-0">
             <div class="card-body">
                 <h5 class="card-title fw-bold mb-3">
-                    Tambah Pembelian
+                    Edit Barang
                 </h5>
-                <form action="{{ route('pembelian.store') }}" method="POST">
+                <form action="{{ route('barang.update',[$data->id]) }}" method="POST">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <div class="container-fluid">
                         <div class="row">
-                          <div class="col-12">
+                          <div class="col-6">
                             <label for="nama_barang" class="fw-medium mb-2 mt-2">Nama Barang</label>
-                            <select name="kode_barang" id="" class="form-select mb-3">
-                                <option selected disabled>Pilih Barang</option>
-                                @foreach ($kode_barang as $d)
-                                <option value="{{ $d->kode_barang }}">{{ $d->nama_barang }} {{ $d->merk }}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                          <div class="col-12">
-                            <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
-                            <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
-                                value="{{ old('jumlah') }}">
-                            @error('jumlah')
+                            <input type="text" readonly name="nama_barang" class="form-control mb-3" placeholder="Nama Barang"
+                                value="{{ $data->nama_barang }}">
+                            @error('nama_barang')
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
+                          </div>
+                          <div class="col-12">
+                              <label for="harga" class="fw-medium mb-2 mt-2">Harga</label>
+                              <input type="number" name="harga" class="form-control mb-3" placeholder="Harga"
+                                  value="{{ $data->harga }}">
+                              @error('harga')
+                                  <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                              @enderror
                           </div>
                           <div class="col-12 mt-3">
                               <a href="{{ route('barang.index') }}" class="btn btn-secondary me-3">Close</a>

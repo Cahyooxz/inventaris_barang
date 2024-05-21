@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('kode_barang')->references('kode_barang')->on('barang')->onDelete('cascade');
             $table->integer('jumlah');
             $table->integer('harga');
+            $table->integer('total');
             $table->timestamps();
         });
     }

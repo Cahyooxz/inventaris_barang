@@ -4,9 +4,9 @@
         <div class="card border-0">
             <div class="card-body">
                 <h5 class="card-title fw-bold mb-3">
-                    Edit Peminjaman
+                    Edit Pemakaian
                 </h5>
-                <form action="{{ route('peminjaman.store') }}" method="POST">
+                <form action="{{ route('pemakaian.update', ['id' => $data->id]) }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="container-fluid">
@@ -18,7 +18,7 @@
                             </select>
                           </div>
                           <div class="col-12">
-                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Peminjam</label>
+                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Pemakaian</label>
                             <select name="peminjam" id="peminjam" class="form-select mb-3">
                                 <option value="{{ $data->id }}">{{ $data->name }} - {{ $data->role }}</option>
                             </select>

@@ -6,9 +6,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Barang;
 use App\Models\BarangPembelian;
-use App\Models\Peminjaman;
+use App\Models\Pemakaian;
 
-class PeminjamanSeeder extends Seeder
+class PemakaianSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +16,9 @@ class PeminjamanSeeder extends Seeder
     public function run(): void
     {
         $barang = Barang::where('kode_barang','K-001')->first();
-        $data = Peminjaman::create([
+        $data = Pemakaian::create([
             'kode_barang' => 'K-001',
-            'peminjam' => '1',
+            'pemakai' => '1',
             'tanggal' => '2024-06-06',
             'jumlah' => 10,
         ]);

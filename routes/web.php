@@ -6,7 +6,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PembelianController;
-use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PemakaianController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -36,12 +36,16 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('users')->group(fu
     Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/download',[UserController::class, 'download'])->middleware(['auth', 'verified'])->name('download');
 });
-
-Route::get('/data-barang',[BarangController::class,'index'])->middleware('auth')->name('barang.index');
-Route::get('/data-barang/create',[BarangController::class,'create'])->middleware('auth')->name('barang.create');
-Route::post('/data-barang/create/add',[BarangController::class,'store'])->middleware('auth')->name('barang.store');
-Route::get('/data-barang/show/{id}',[BarangController::class,'show'])->middleware('auth')->name('barang.show');
-Route::get('/barang/download',[BarangController::class, 'download'])->middleware(['auth', 'verified'])->name('download-barang');
+Route::middleware(['auth','verified'])->prefix('data-barang')->group(function(){
+    Route::get('/',[BarangController::class,'index'])->middleware('auth')->name('barang.index');
+    Route::get('/create',[BarangController::class,'create'])->middleware('auth')->name('barang.create');
+    Route::post('/create/add',[BarangController::class,'store'])->middleware('auth')->name('barang.store');
+    Route::get('/show/{id}',[BarangController::class,'show'])->middleware('auth')->name('barang.show');
+    Route::get('/edit/{id}',[BarangController::class,'edit'])->middleware('auth')->name('barang.edit');
+    Route::put('/edit/{id}/update',[BarangController::class,'update'])->middleware('auth')->name('barang.update');
+    Route::delete('/delete/{id}',[BarangController::class,'destroy'])->middleware('auth')->name('barang.destroy');
+    Route::get('/download',[BarangController::class, 'download'])->middleware(['auth', 'verified'])->name('download-barang');
+});
 
 Route::middleware(['auth','verified','role:admin'])->prefix('pembelian-barang')->group(function(){
     Route::get('/', [PembelianController::class,'index'])->name('pembelian.index');
@@ -49,13 +53,15 @@ Route::middleware(['auth','verified','role:admin'])->prefix('pembelian-barang')-
     Route::post('/create/add', [PembelianController::class,'store'])->name('pembelian.store');
     Route::get('/edit/{id}', [PembelianController::class,'edit'])->name('pembelian.edit');
     Route::put('/edit/{id}/update', [PembelianController::class,'update'])->name('pembelian.update');
+    Route::delete('/delete/{id}', [PembelianController::class,'destroy'])->name('pembelian.destroy');
 });
-Route::middleware(['auth','verified','role:admin'])->prefix('peminjaman-barang')->group(function(){
-    Route::get('/', [PeminjamanController::class,'index'])->name('peminjaman.index');
-    Route::get('/create', [PeminjamanController::class,'create'])->name('peminjaman.create');
-    Route::post('/create/add', [PeminjamanController::class,'store'])->name('peminjaman.store');
-    Route::get('/edit/{id}', [PeminjamanController::class,'edit'])->name('peminjaman.edit');
-    Route::put('/edit/{id}/update', [PeminjamanController::class,'update'])->name('peminjaman.update');
+Route::middleware(['auth','verified','role:admin'])->prefix('pemakaian-barang')->group(function(){
+    Route::get('/', [PemakaianController::class,'index'])->name('pemakaian.index');
+    Route::get('/create', [PemakaianController::class,'create'])->name('pemakaian.create');
+    Route::post('/create/add', [PemakaianController::class,'store'])->name('pemakaian.store');
+    Route::get('/edit/{id}', [PemakaianController::class,'edit'])->name('pemakaian.edit');
+    Route::put('/edit/{id}/update', [PemakaianController::class,'update'])->name('pemakaian.update');
+    Route::delete('/delete/{id}/', [PemakaianController::class,'destroy'])->name('pemakaian.destroy');
 });
 
 Route::middleware('auth')->group(function () {

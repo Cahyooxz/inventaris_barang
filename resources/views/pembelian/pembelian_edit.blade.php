@@ -19,20 +19,14 @@
                           </div>
                           <div class="col-12">
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
-                            <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
+                            <input type="number" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
                                 value="{{ $data->jumlah }}">
                             @error('jumlah')
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
-                            <label for="harga" class="fw-medium mb-2 mt-2">Harga</label>
-                            <input type="text" name="harga" class="form-control mb-3" placeholder="Harga"
-                                value="{{ $data->harga }}">
-                            @error('harga')
-                                <small class="text-danger mb-3 d-block">{{ $message }}</small>
-                            @enderror
                           </div>
                           <div class="col-12 mt-3">
-                              <a href="{{ route('barang.index') }}" class="btn btn-secondary me-3">Close</a>
+                              <a href="{{ route('pembelian.index') }}" class="btn btn-secondary me-3">Close</a>
                               <button type="submit" class="btn btn-success">Submit</button>
                           </div>
                         </div>

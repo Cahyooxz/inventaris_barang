@@ -22,9 +22,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Merk</th>
+                                <th>Merk/Type</th>
                                 <th>Jumlah</th>
                                 <th>Harga</th>
+                                <th>Total Harga</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -36,43 +37,47 @@
                                 <td>{{ $d->merk }}</td>
                                 <td>{{ $d->jumlah }}</td>
                                 <td>{{ $d->harga }}</td>
+                                <td>Rp. {{ $d->total }}</td>
                                 <td>
-                                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="bi bi-gear me-3"></i>Option
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ route('pembelian.edit',['id' => $d->id]) }}" class="dropdown-item" href="#"><i class="bi bi-person-fill-gear me-2 i-icon"></i>Edit</a></li>
-                                        <li>
-                                          {{-- <form id="hapus-users-{{ $d->id }}" action="{{ route('users.hapus', $d->id) }}" method="POST">
-                                            <button type="button" id="btnHapusUsers{{ $d->id }}" class="dropdown-item text-danger">
-                                              <i class="bi bi-person-fill-dash me-2 i-icon"></i>Hapus
-                                            </button>
-                                            @csrf
-                                            @method('DELETE')
-                                          </form> --}}
-                                          <script>
-                                            document.addEventListener('DOMContentLoaded', function() {
-                                                document.getElementById('btnHapusUsers{{ $d->id }}').addEventListener('click', function() {
-                                                    Swal.fire({
-                                                        title: 'Apakah Anda yakin menghapus {{ $d->name}} ?',
-                                                        text: "Data yang dihapus tidak dapat dikembalikan!",
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#d33',
-                                                        cancelButtonColor: '#3085d6',
-                                                        confirmButtonText: 'Ya, hapus!',
-                                                        cancelButtonText: 'Batal'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            document.getElementById('hapus-users-{{ $d->id }}').submit();
-                                                        }
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="bi bi-gear me-3"></i>Option
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item"
+                                                    href="{{ route('pembelian.edit', ['id' => $d->id]) }}"><i
+                                                        class="bi bi-pen me-2"></i>Edit</a>
+                                            </li>
+                                            <li>
+                                                <form id="hapus-pembelian-{{ $d->id }}" action="{{ route('pembelian.destroy', ['id' => $d->id]) }}" method="POST" class="form-delete">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="dropdown-item text-danger btn-delete" id="btnHapusPembelian{{ $d->id }}"><i class="bi bi-trash3 me-2"></i>Delete</button>
+                                                </form>
+                                                  <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        document.getElementById('btnHapusPembelian{{ $d->id }}').addEventListener('click', function() {
+                                                            Swal.fire({
+                                                                title: 'Apakah Anda yakin menghapus data {{ $d->nama_barang}} ?',
+                                                                text: "Data yang dihapus tidak dapat dikembalikan!",
+                                                                icon: 'warning',
+                                                                showCancelButton: true,
+                                                                confirmButtonColor: '#d33',
+                                                                cancelButtonColor: '#3085d6',
+                                                                confirmButtonText: 'Ya, hapus!',
+                                                                cancelButtonText: 'Batal'
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById('hapus-pembelian-{{ $d->id }}').submit();
+                                                                }
+                                                            });
+                                                        });
                                                     });
-                                                });
-                                            });
-                                          </script>
-                                        </li>
-                                      </ul>
+                                                  </script>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

@@ -32,7 +32,7 @@
                             : {{ $data->jenis_barang }}
                         </div>
                         <div class="col-3 border fw-semibold pb-5 pt-2">
-                            Merk
+                            Merk/type
                         </div>
                         <div class="col-9 border pb-5 pt-2">
                             : {{ $data->merk }}

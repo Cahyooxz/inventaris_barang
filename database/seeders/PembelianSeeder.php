@@ -19,6 +19,7 @@ class PembelianSeeder extends Seeder
             'kode_barang' => 'K-001',
             'jumlah' => 20,
             'harga' => 9000,
+            'total' =>  9000 * 20,
         ]);
         $barang->update([
             'jumlah' => $barang->jumlah + 20,

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
+use App\Models\BarangPembelian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -16,8 +18,40 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user()->name;
+        $tanggal = Carbon::now();
+
+        
+        $totalPembelian = BarangPembelian::whereYear('created_at', $tanggal->year)
+        ->whereMonth('created_at',$tanggal->month)
+        ->sum('total');
+        
+        // bulan kemarin di tahun ini
+        $tanggalk = Carbon::now()->subMonths();
+        $totalPembelianLalu = BarangPembelian::whereYear('created_at', $tanggalk->year)
+        ->whereMonth('created_at', $tanggalk->month)
+        ->sum('total');
+
+        // menghitung selisih antara kedua waktu bulan ini dan kemarin
+        $total = $totalPembelian - $totalPembelianLalu;
+        if($total !=0){
+            if($total >0){
+                $status = 'naik';
+                $persen = ($total / $totalPembelianLalu) * 100;
+            }
+            elseif($total <0){
+                $status = 'turun';
+                $persen = ($total / $totalPembelianLalu) * 100;
+            }
+        } else{
+            $status = 'tidak berubah';
+        }
+        $persen_format = number_format($persen, 2);
         return view('dashboard',[
             'user' => $user,
+            'total_pembelian' => $totalPembelian,
+            'total_lalu' => $totalPembelianLalu,
+            'status' => $status,
+            'persen' => $persen_format,
         ]);
     }
 

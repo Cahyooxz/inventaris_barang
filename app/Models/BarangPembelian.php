@@ -15,5 +15,6 @@ class BarangPembelian extends Model
         'kode_barang',
         'jumlah',
         'harga',
+        'total',
     ];
 }

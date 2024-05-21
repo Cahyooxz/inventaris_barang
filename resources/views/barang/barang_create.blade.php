@@ -36,7 +36,7 @@
                             @enderror
                           </div>
                           <div class="col-12">
-                            <label for="merk" class="fw-medium mb-2 mt-2">Merk Barang</label>
+                            <label for="merk" class="fw-medium mb-2 mt-2">Merk / Type Barang</label>
                             <input type="text" name="merk" class="form-control mb-3" placeholder="Merk Barang"
                                 value="{{ old('merk') }}">
                             @error('merk')

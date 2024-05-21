@@ -5,6 +5,60 @@
             <h4>Admin Dashboard</h4>
         </div>
         <div class="row">
+            <div class="col-3">
+                <div class="card border-0 border-start border-3 border-danger">
+                    <div class="card-body py-4">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h4 class="mb-4">
+                                    Barang
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card border-0 border-start border-3 border-danger">
+                    <div class="card-body py-4">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h4 class="mb-4">
+                                    Barang
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card border-0 border-start border-3 border-danger">
+                    <div class="card-body py-4">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h4 class="mb-4">
+                                    Barang
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card border-0 border-start border-3 border-danger">
+                    <div class="card-body py-4">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h4 class="mb-4">
+                                    Barang
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-content row">
             <div class="col-12 col-md-6 d-flex">
                 <div class="card flex-fill border-0 illustration">
                     <div class="card-body p-0 d-flex flex-fill">
@@ -28,14 +82,14 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-grow-1">
                                 <h4 class="mb-2">
-                                    $ 78.00
+                                    Rp. {{ number_format($total_pembelian, 0, ',', '.') }}
                                 </h4>
                                 <p class="mb-2">
-                                    Total Earnings
+                                    Total Purchases This Month  
                                 </p>
                                 <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
+                                    <span class="badge text-{{ $status == 'naik' ? 'success' : 'danger' }} me-2">
+                                        {{ $persen }}
                                     </span>
                                     <span class="text-muted">
                                         Since Last Month

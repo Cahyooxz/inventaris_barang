@@ -4,9 +4,9 @@
         <div class="card border-0">
             <div class="card-body">
                 <h5 class="card-title fw-bold mb-3">
-                    Tambah Peminjaman
+                    Tambah Pemakaian
                 </h5>
-                <form action="{{ route('peminjaman.store') }}" method="POST">
+                <form action="{{ route('pemakaian.store') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="container-fluid">
@@ -21,9 +21,9 @@
                             </select>
                           </div>
                           <div class="col-12">
-                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Peminjam</label>
-                            <select name="peminjam" id="peminjam" class="form-select mb-3">
-                                <option selected disabled>Pilih Peminjam</option>
+                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Pemakai</label>
+                            <select name="pemakai" id="pemakai" class="form-select mb-3">
+                                <option selected disabled>Pilih Pemakai</option>
                                 @foreach ($user as $d)
                                 <option value="{{ $d->id }}">{{ $d->name }} - {{ $d->role }}</option>
                                 @endforeach
@@ -33,9 +33,10 @@
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
                             <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
                                 value="{{ old('jumlah') }}">
-                            @error('jumlah')
-                                <small class="text-danger mb-3 d-block">{{ $message }}</small>
-                            @enderror
+                            @if(session('fail-pemakaian'))
+                            <small class="text-danger mb-3 d-block">Stok barang yang tersisa hanya {{ (session('jumlah_barang')) }}</small>
+                            @endif
+
                             <label for="tanggal" class="fw-medium mb-2 mt-2">Tanggal</label>
                             <input type="date" name="tanggal" class="form-control mb-3" placeholder="Tanggal"
                                 value="{{ old('tanggal') }}">
@@ -44,7 +45,7 @@
                             @enderror
                           </div>
                           <div class="col-12 mt-5">
-                              <a href="{{ route('barang.index') }}" class="btn btn-secondary me-3">Close</a>
+                              <a href="{{ route('pemakaian.index') }}" class="btn btn-secondary me-3">Close</a>
                               <button type="submit" class="btn btn-success">Submit</button>
                           </div>
                         </div>

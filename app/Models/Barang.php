@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BarangPembelian;
 
 class Barang extends Model
 {
     use HasFactory;
+    protected $table = 'barang';
 
     protected $fillable = [
         'kode_barang',
@@ -17,6 +19,17 @@ class Barang extends Model
         'jumlah',
         'harga',
     ];
+    protected static function booted()
+    {
+        static::updated(function ($barang) {
+            if ($barang->isDirty('harga')) {
+                $pembelian = BarangPembelian::where('kode_barang', $barang->kode_barang)->first();
 
-    protected $table = 'barang';
+                $pembelian->update([
+                    'harga' => $barang->harga,
+                    'total' => $barang->harga * $pembelian->jumlah,
+                ]);
+            }
+        });
+    }
 }

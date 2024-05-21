@@ -32,7 +32,21 @@ h4 {
     font-size: 1.275rem;
     color: var(--bs-emphasis-color);
 }
+@keyframes fadeIn {
+    from{
+        filter: opacity(0);
+        transform: translateY(-20px);
+    }
+    to{
+        filter: opacity(100%);
+        transform: translateY(0px);
+    }
+}
 
+.dashboard-content{
+    transition: all 0.5 ease-in;
+    animation: fadeIn 0.7s;
+}
 /* Layout for admin dashboard skeleton */
 
 .wrapper {
