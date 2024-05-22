@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 dashboard-content">
         <div class="mb-3">
             <h4>Data Pemakaian</h4>
         </div>
@@ -10,8 +10,10 @@
                 <h6 class="card-subtitle text-muted">
                 </h6>
                 <div class="d-flex mt-3">
+                    @if(!$barang->isEmpty())
                     <a href="{{ route('pemakaian.create') }}" class="btn-b text-decoration-none p-0 m-0 py-2 px-3 rounded text-light ms-auto me-3"><i class="bi bi-plus-circle me-3"></i>Tambah Pemakaian</a>
-                    <a href="" class="btn btn-success"><i
+                    @endif
+                    <a href="" class="btn btn-success {{ $barang->isEmpty() ? 'ms-auto' : ''}}"><i
                             class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
                 </div>
             </div>

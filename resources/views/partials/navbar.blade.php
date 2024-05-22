@@ -9,7 +9,7 @@
                 <img src="{{ asset('image/profile.jpg') }}" class="ms-3 avatar img-fluid rounded" alt="">
               </a>
               <div class="dropdown-menu dropdown-menu-end">
-                  <a href="#" class="dropdown-item"><i class="bi bi-person-fill me-3"></i>Profile</a>
+                  <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="bi bi-person-fill me-3"></i>Profile</a>
                   <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     @method('POST')

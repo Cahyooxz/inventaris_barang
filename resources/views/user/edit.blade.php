@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 dashboard-content">
         <div class="card border-0">
             <div class="card-body">
                 <form action="{{ route('users.update',['id' => $data->id]) }}" method="POST">

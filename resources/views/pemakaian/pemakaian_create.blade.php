@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="dashboard-content container-fluid mt-3">
+        @if(!$barang->isEmpty())
         <div class="card border-0">
             <div class="card-body">
                 <h5 class="card-title fw-bold mb-3">
@@ -62,5 +63,17 @@
                 </form>
             </div>
         </div>
+        @else
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="vh-90 d-flex flex-column align-items-center justify-content-center">
+                    <h4 class="icon-pemakai"><i class="fa-solid fa-boxes-stacked"></i></h4>
+                    <h5 class="card-title fw-bold mb-3 mt-5">
+                        Stok seluruh barang habis.
+                    </h5>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection

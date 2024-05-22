@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\PembelianExport;
 use App\Models\BarangPembelian;
 use App\Models\Barang;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class PembelianController extends Controller
@@ -20,7 +22,10 @@ class PembelianController extends Controller
             'data' => $data,
         ]);
     }
-
+    public function download(){
+        return Excel::download(new PembelianExport, 'data_pembelian.xlsx');
+        
+    }
     /**
      * Show the form for creating a new resource.
      */

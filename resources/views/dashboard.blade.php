@@ -6,13 +6,13 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="card alert alert-secondary">
+                <div class="card card-dashboard bg-gray text-light">
                     <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="d-flex gap-5">
-                                <h4 class="mb-4 a-icon alert-link"><i class="bi bi-people-fill"></i></h4>
-                                <div class="d-flex flex-column gap-3">
-                                    <h5 class="fw-bold">Data User</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex">
+                                <h4 class="a-icon"><i class="bi bi-people-fill"></i></h4>
+                                <div class="ms-5 d-flex flex-column gap-3">
+                                    <h5 class="fw-medium">Data User</h5>
                                     <h1 class="fw-bold">{{ $data['user'] }}</h1>
                                 </div>
                             </div>
@@ -21,13 +21,13 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="card alert alert-primary">
+                <div class="card card-dashboard bg-gray text-light">
                     <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="d-flex gap-5">
-                                <h4 class="mb-4 a-icon alert-link"><i class="fa-solid fa-boxes-stacked"></i></h4>
-                                <div class="d-flex flex-column gap-3">
-                                    <h5 class="fw-bold">Data Barang</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex">
+                                <h4 class="a-icon"><i class="fa-solid fa-boxes-stacked"></i></h4>
+                                <div class="ms-5 d-flex flex-column gap-3">
+                                    <h5 class="fw-medium">Data Barang</h5>
                                     <h1 class="fw-bold">{{ $data['barang'] }}</h1>
                                 </div>
                             </div>
@@ -36,13 +36,13 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="card alert alert-success">
+                <div class="card card-dashboard bg-gray text-light">
                     <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="d-flex gap-5">
-                                <h4 class="mb-4 a-icon alert-link"><i class="fa-solid fa-cart-shopping"></i></h4>
-                                <div class="d-flex flex-column gap-3">
-                                    <h5 class="fw-bold">Data Pembelian</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex">
+                                <h4 class="a-icon"><i class="fa-solid fa-cart-shopping"></i></h4>
+                                <div class="ms-5 d-flex flex-column gap-3">
+                                    <h5 class="fw-medium">Data Pembelian</h5>
                                     <h1 class="fw-bold">{{ $data['pembelian'] }}</h1>
                                 </div>
                             </div>
@@ -51,13 +51,13 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="card alert alert-danger">
+                <div class="card card-dashboard bg-gray text-light">
                     <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="d-flex gap-5">
-                                <h4 class="mb-4 a-icon alert-link"> <i class="fa-solid fa-people-carry-box"></i></h4>
-                                <div class="d-flex flex-column gap-3">
-                                    <h5 class="fw-bold">Data Pemakaian</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex">
+                                <h4 class="a-icon"> <i class="fa-solid fa-people-carry-box"></i></h4>
+                                <div class="ms-5 d-flex flex-column gap-3">
+                                    <h5 class="fw-medium">Data Pemakaian</h5>
                                     <h1 class="fw-bold">{{ $data['pemakaian'] }}</h1>
                                 </div>
                             </div>

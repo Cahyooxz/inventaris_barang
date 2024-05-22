@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 dashboard-content">
         <div class="mb-3">
             <h4>Data Pembelian</h4>
         </div>
@@ -11,7 +11,7 @@
                 </h6>
                 <div class="d-flex mt-3">
                     <a href="{{ route('pembelian.create') }}" class="btn-b text-decoration-none p-0 m-0 py-2 px-3 rounded text-light ms-auto me-3"><i class="bi bi-plus-circle me-3"></i>Tambah Pembelian</a>
-                    <a href="" class="btn btn-success"><i
+                    <a href="{{ route('pembelian.download') }}" class="btn btn-success"><i
                             class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
                 </div>
             </div>

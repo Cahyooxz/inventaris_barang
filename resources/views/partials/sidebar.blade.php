@@ -11,12 +11,14 @@
                   Dashboard
               </a>
           </li>
+          @if(auth()->user()->hasRole('admin'))
           <li class="sidebar-item">
               <a href="{{ route('users.index') }}" class="sidebar-link">
                 <i class="bi bi-people-fill pe-2"></i>
                   Users
               </a>
           </li>
+          @endif
           <li class="sidebar-item">
               <a href="{{ route('barang.index') }}" class="sidebar-link">
                 <i class="fa-solid fa-box pe-2"></i>
@@ -35,12 +37,14 @@
                         Data Pembelian
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('pemakaian.index') }}" class="sidebar-link">
-                        <i class="fa-solid fa-people-carry-box pe-2"></i>
-                        Data Pemakaian
-                    </a>
-                </li>
+                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('operator'))
+                    <li class="sidebar-item">
+                        <a href="{{ route('pemakaian.index') }}" class="sidebar-link">
+                            <i class="fa-solid fa-people-carry-box pe-2"></i>
+                            Data Pemakaian
+                        </a>
+                    </li>
+                @endif
               </ul>
           </li>
       </ul>

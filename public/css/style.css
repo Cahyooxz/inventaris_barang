@@ -22,13 +22,25 @@ a {
 .bg-gray{
     background-color: #526D82;
 }
+.bg-biru{
+    background-color: #cfe2ff;;
+}
 .text-gray{
     color: #526D82;
+}
+.vh-90{
+    min-height: 90vh;
+}
+.icon-pemakai{
+    font-size: 100px;
+    padding: 0;
+    margin: 0;
 }
 .a-icon{
     font-size: 70px;
     padding: 0;
     margin: 0;
+    color: #FFF;
 }
 
 li {
@@ -50,7 +62,14 @@ h4 {
         transform: translateY(0px);
     }
 }
-
+.card-dashboard{
+    transition: all ease-out 0.4s;
+}
+.card-dashboard:hover{
+    background-color: #27374D;
+    transition: all ease-in 0.3s;
+    transform: translateY(-10px);
+}
 .dashboard-content{
     transition: all 0.5 ease-in;
     animation: fadeIn 0.7s;

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 dashboard-content">
         <div class="card border-0">
             <div class="card-body">
                 <h5 class="card-title fw-bold mb-3">

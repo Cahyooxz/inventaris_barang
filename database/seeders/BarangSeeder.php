@@ -17,7 +17,7 @@ class BarangSeeder extends Seeder
             'kode_barang' => 'K-001',
             'nama_barang' => 'Kompor',
             'jenis_barang' => 'Peralatan Rumah Tangga',
-            'merk' => 'Kompor Minyak Cap Kaki Nyamuk',
+            'merk' => 'Cap Kaki Nyamuk',
             'harga' => 1000,
             'jumlah' => 10,
         ]);

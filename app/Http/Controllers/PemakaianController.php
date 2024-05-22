@@ -19,10 +19,12 @@ class PemakaianController extends Controller
         ->join('users','users.id','=','data_pemakaian.pemakai')
         ->select('data_pemakaian.id','barang.nama_barang','barang.merk','users.name','users.role','data_pemakaian.jumlah','data_pemakaian.tanggal')
         ->get();
+        $barang = Barang::select('kode_barang','nama_barang','merk', 'jumlah')->where('jumlah','>',0)->get();
 
         return view('pemakaian.pemakaian_index',
         [
             'data' => $data,
+            'barang' => $barang,
         ]);
     }
 

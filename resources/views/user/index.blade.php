@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 dashboard-content">
         <div class="mb-3">
             <h4>Data Users</h4>
         </div>

@@ -48,15 +48,16 @@ Route::middleware(['auth','verified'])->prefix('data-barang')->group(function(){
     Route::get('/download',[BarangController::class, 'download'])->middleware(['auth', 'verified'])->name('download-barang');
 });
 
-Route::middleware(['auth','verified','role:admin'])->prefix('pembelian-barang')->group(function(){
+Route::middleware(['auth','verified','role:admin|operator|petugas'])->prefix('pembelian-barang')->group(function(){
     Route::get('/', [PembelianController::class,'index'])->name('pembelian.index');
     Route::get('/create', [PembelianController::class,'create'])->name('pembelian.create');
     Route::post('/create/add', [PembelianController::class,'store'])->name('pembelian.store');
     Route::get('/edit/{id}', [PembelianController::class,'edit'])->name('pembelian.edit');
     Route::put('/edit/{id}/update', [PembelianController::class,'update'])->name('pembelian.update');
     Route::delete('/delete/{id}', [PembelianController::class,'destroy'])->name('pembelian.destroy');
+    Route::get('/download', [PembelianController::class,'download'])->name('pembelian.download');
 });
-Route::middleware(['auth','verified','role:admin'])->prefix('pemakaian-barang')->group(function(){
+Route::middleware(['auth','verified','role:admin|operator'])->prefix('pemakaian-barang')->group(function(){
     Route::get('/', [PemakaianController::class,'index'])->name('pemakaian.index');
     Route::get('/create', [PemakaianController::class,'create'])->name('pemakaian.create');
     Route::post('/create/add', [PemakaianController::class,'store'])->name('pemakaian.store');
