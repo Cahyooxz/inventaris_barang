@@ -2,7 +2,7 @@
     <script>
         Swal.fire({
             title: "Berhasil!",
-            text: "Data berhasil ditambahkan!",
+            text: "{{ session('success') }}",
             icon: "success"
         });
     </script>
@@ -10,7 +10,7 @@
     <script>
         Swal.fire({
             title: "Berhasil!",
-            text: "Data berhasil diperbarui!",
+            text: "{{ session('success-update') }}!",
             icon: "success"
         });
     </script>
@@ -18,7 +18,7 @@
     <script>
         Swal.fire({
             title: "Berhasil!",
-            text: "Data berhasil dihapus!",
+            text: "{{ session('success-delete') }}",
             icon: "success"
         });
     </script>

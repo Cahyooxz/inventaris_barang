@@ -40,7 +40,18 @@ class BarangController extends Controller
             'merk' => 'required',
             'jumlah' => 'required',
             'harga' => 'required',
-        ]);
+        ],
+        [
+            'kode_barang.required' => 'Data kode barang wajib Diisi',
+            'kode_barang.min' => 'Data kode barang min',
+            'pemakai.required' => 'Nama pemakai wajib diisi',
+            'jumlah.required' => 'Data jumlah barang wajib diisi',
+            'jumlah.integer' => 'Data jumlah barang harus berisi angka',
+            'jumlah.min' => 'Data jumlah barang minimal :min',
+            'tanggal.required' => 'Tanggal pemakaian wajib diisi',
+            'ruangan_id.exits' => 'Ruangan tidak ditemukan',
+        ]
+    );
 
         $data = ([
             'kode_barang' => $request->kode_barang,
@@ -52,7 +63,7 @@ class BarangController extends Controller
         ]);
 
         if($barang = Barang::create($data)){
-            return redirect()->route('barang.index')->with('success','Data Barang berhasil disimpan');
+            return redirect()->route('barang.index')->with('success','Data barang '.$data['nama_barang'].' berhasil disimpan!');
         }else{
             return redirect()->back();
         }
@@ -96,7 +107,7 @@ class BarangController extends Controller
         ]);
 
         if($barang_update){
-            return redirect()->route('barang.index')->with('success-update', 'Data berhasil diedit');
+            return redirect()->route('barang.index')->with('success-update', 'Data barang '.$barang->nama_barang.' berhasil diedit');
         }
     }
 

@@ -27,6 +27,19 @@
                             </select>
                           </div>
                           <div class="col-12">
+                            <label for="ruangan" class="fw-medium mb-2 mt-2">Nama Ruangan</label>
+                            <p class="text-muted">*optional</p>
+                            <select name="ruangan" id="ruangan" class="form-select mb-3">
+                                <option selected disabled>Pilih ruangan</option>
+                                @foreach ($ruangan as $r)
+                                <option value="{{ $r->id}}" {{ $r->id === $data->ruang_id ? 'selected' : ''}}>{{ $r->nama_ruangan }}</option>
+                                @endforeach
+                            </select>
+                            @error('ruangan')
+                            <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                            @enderror
+                          </div>
+                          <div class="col-12">
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
                             <input type="number" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
                                 value="{{ $data->jumlah }}">
@@ -41,7 +54,7 @@
                             @enderror
                           </div>
                           <div class="col-12 mt-5">
-                              <a href="{{ route('barang.index') }}" class="btn btn-secondary me-3">Close</a>
+                              <a href="{{ route('pemakaian.index') }}" class="btn btn-secondary me-3">Close</a>
                               <button type="submit" class="btn btn-success">Submit</button>
                           </div>
                         </div>

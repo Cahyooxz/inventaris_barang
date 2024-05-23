@@ -24,8 +24,9 @@
                             <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
                           </div>
+
                           <div class="col-12">
-                            <label for="peminjam" class="fw-medium mb-2 mt-2">Nama Pemakai</label>
+                            <label for="pemakai" class="fw-medium mb-2 mt-2">Nama Pemakai</label>
                             <select name="pemakai" id="pemakai" class="form-select mb-3">
                                 <option selected disabled>Pilih Pemakai</option>
                                 @foreach ($user as $d)
@@ -36,6 +37,21 @@
                             <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
                           </div>
+
+                          <div class="col-12">
+                            <label for="ruangan_id" class="fw-medium mb-2 mt-2">Ruangan</label>
+                            <p class="text-muted">*optional</p>
+                            <select name="ruangan_id" id="ruangan_id" class="form-select mb-3">
+                                <option selected value="">Pilih Ruangan</option>
+                                @foreach ($ruangan as $r)
+                                <option value="{{ $r->id }}">{{ $r->nama_ruangan }}</option>
+                                @endforeach
+                            </select>
+                            @error('ruangan_id')
+                            <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                            @enderror
+                          </div>
+
                           <div class="col-12">
                             <label for="jumlah" class="fw-medium mb-2 mt-2">Jumlah</label>
                             <input type="jumlah" name="jumlah" class="form-control mb-3" placeholder="Jumlah Barang"
@@ -54,6 +70,7 @@
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
                           </div>
+
                           <div class="col-12 mt-5">
                               <a href="{{ route('pemakaian.index') }}" class="btn btn-secondary me-3">Close</a>
                               <button type="submit" class="btn btn-success">Submit</button>

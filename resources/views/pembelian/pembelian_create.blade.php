@@ -18,6 +18,9 @@
                                 @foreach ($kode_barang as $d)
                                 <option value="{{ $d->kode_barang }}">{{ $d->nama_barang }} {{ $d->merk }}</option>
                                 @endforeach
+                                @error('kode_barang')
+                                <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                                @enderror
                             </select>
                           </div>
                           <div class="col-12">

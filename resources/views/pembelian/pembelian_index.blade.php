@@ -36,8 +36,8 @@
                                 <td>{{ $d->nama_barang }}</td>
                                 <td>{{ $d->merk }}</td>
                                 <td>{{ $d->jumlah }}</td>
-                                <td>{{ $d->harga }}</td>
-                                <td>Rp. {{ $d->total }}</td>
+                                <td>Rp. {{ number_format($d->harga,0,',','.') }}</td>
+                                <td>Rp. {{ number_format($d->total,0,',','.') }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"

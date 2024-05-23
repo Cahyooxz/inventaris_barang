@@ -34,8 +34,11 @@ class PembelianExport implements FromCollection, WithHeadings, WithStyles
     public function styles(Worksheet $sheet)
     {
         $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:E1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFCCFFCC');
         $sheet->getStyle('A:E')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('D:E')->getNumberFormat()->setFormatCode('#,##0');
+        // size sesuai value
+        foreach (range('A', 'E') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
     }
 }

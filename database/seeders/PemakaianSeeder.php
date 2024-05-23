@@ -20,6 +20,7 @@ class PemakaianSeeder extends Seeder
             'kode_barang' => 'K-001',
             'pemakai' => '1',
             'tanggal' => '2024-06-06',
+            'ruang_id' => '1',
             'jumlah' => 10,
         ]);
         $barang->update([

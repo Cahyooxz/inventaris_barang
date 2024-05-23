@@ -64,7 +64,7 @@ class UserController extends Controller
             } elseif($request->role === 'petugas'){
                 $user->assignRole('petugas');
             }
-            return redirect()->route('users.index')->with('success', "Data Berhasil Disimpan");
+            return redirect()->route('users.index')->with('success', "Data user ".$data['name']." berhasil disimpan!");
         }else{
             return redirect()->back();
         }
@@ -121,7 +121,7 @@ class UserController extends Controller
             }elseif($user->role === 'operator'){
                 $user->syncRoles('operator');
             }
-            return redirect()->route('users.index')->with('success-update','Data berhasil diedit');
+            return redirect()->route('users.index')->with('success-update','Data user '.$user->name.' berhasil diedit!');
         }
     }
 
@@ -132,6 +132,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with('success-delete','Data berhasil dihapus');
+        return redirect()->route('users.index')->with('success-delete','Data user '.$user->name.' berhasil dihapus!');
     }
 }

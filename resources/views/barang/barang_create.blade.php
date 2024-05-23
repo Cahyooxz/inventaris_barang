@@ -53,10 +53,13 @@
                           </div>
                           <div class="col-12">
                               <label for="harga" class="fw-medium mb-2 mt-2">Harga</label>
-                              <input type="text" name="harga" class="form-control mb-3" placeholder="Harga"
-                                  value="{{ old('harga') }}">
+                              <div class="input-group mb-3">
+                                  <span class="input-group-text">Rp.</span>
+                                  <input type="text" name="harga" class="form-control" placeholder="Harga"
+                                      value="{{ old('harga') }}">
+                              </div>
                               @error('harga')
-                                  <small class="text-danger mb-3 d-block">{{ $message }}</small>
+                              <small class="text-danger mb-3 d-block">{{ $message }}</small>
                               @enderror
                           </div>
                           <div class="col-12 mt-5">

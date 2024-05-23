@@ -13,7 +13,7 @@ class UsersExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return User::all(['id', 'username', 'name', 'email', 'role']);
+        return User::all();
     }
     public function headings(): array
     {

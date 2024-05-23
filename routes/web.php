@@ -3,11 +3,12 @@
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PemakaianController;
-use App\Http\Controllers\DataPembelian;
+use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -23,7 +24,7 @@ use Spatie\Permission\Models\Role;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -64,6 +65,20 @@ Route::middleware(['auth','verified','role:admin|operator'])->prefix('pemakaian-
     Route::get('/edit/{id}', [PemakaianController::class,'edit'])->name('pemakaian.edit');
     Route::put('/edit/{id}/update', [PemakaianController::class,'update'])->name('pemakaian.update');
     Route::delete('/delete/{id}/', [PemakaianController::class,'destroy'])->name('pemakaian.destroy');
+    Route::get('/download', [PemakaianController::class,'download'])->name('pemakaian.download');
+});
+
+Route::middleware(['auth','verified','role:admin|operator|petugas'])->prefix('ruangan')->group(function(){
+    Route::get('/', [RuanganController::class,'index'])->name('ruangan.index');
+    Route::get('/create', [RuanganController::class,'create'])->name('ruangan.create');
+    Route::post('/create/add', [RuanganController::class,'store'])->name('ruangan.store');
+    Route::get('/edit/{id}', [RuanganController::class,'edit'])->name('ruangan.edit');
+    Route::put('/edit/{id}/update', [RuanganController::class,'update'])->name('ruangan.update');
+    Route::delete('/delete/{id}/', [RuanganController::class,'destroy'])->name('ruangan.destroy');
+});
+
+Route::middleware(['auth','verified','role:admin'])->prefix('inventaris')->group(function(){
+    Route::get('/', [InventarisController::class,'index'])->name('inventaris.index');
 });
 
 Route::middleware('auth')->group(function () {

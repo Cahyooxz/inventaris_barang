@@ -38,7 +38,8 @@
                                     <td>{{ $d->jenis_barang }}</td>
                                     <td>{{ $d->merk }}</td>
                                     <td>{{ $d->jumlah }}</td>
-                                    <td>Rp. {{ $d->harga }}</td>
+                                    
+                                    <td>Rp. {{ number_format($d->harga,0,',','.') }}</td>
                                     <td>
                                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
