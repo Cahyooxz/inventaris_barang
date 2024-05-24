@@ -21,5 +21,13 @@
             text: "{{ session('success-delete') }}",
             icon: "success"
         });
+        </script>
+@elseif(session('fail'))
+    <script>
+        Swal.fire({
+            title: "Gagal!",
+            text: "{{ session('fail') }}!",
+            icon: "error"
+        });
     </script>
 @endif

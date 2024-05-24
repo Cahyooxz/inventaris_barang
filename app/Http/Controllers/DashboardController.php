@@ -50,6 +50,8 @@ class DashboardController extends Controller
         }
         $persen_format = number_format($persen, 2);
 
+
+
         $users = User::count();
         $barangs = Barang::count();
         $pengembelians = BarangPembelian::count();

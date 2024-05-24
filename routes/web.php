@@ -79,6 +79,7 @@ Route::middleware(['auth','verified','role:admin|operator|petugas'])->prefix('ru
 
 Route::middleware(['auth','verified','role:admin'])->prefix('inventaris')->group(function(){
     Route::get('/', [InventarisController::class,'index'])->name('inventaris.index');
+    Route::get('/download', [InventarisController::class,'download'])->name('inventaris.download');
 });
 
 Route::middleware('auth')->group(function () {

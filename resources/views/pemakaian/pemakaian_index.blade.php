@@ -43,15 +43,20 @@
                                     <td>{{ $d->role  }}</td>
                                     <td>{{ $d->jumlah  }}</td>
                                     <td>{{ $d->tanggal  }}</td>
-                                    <td>{{ $d->nama_ruangan }}</td>
-
+                                    <td>
+                                        @if($d->nama_ruangan)
+                                            {{ $d->nama_ruangan }}
+                                        @else
+                                            N/A
+                                        @endif
                                     <td>
                                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="bi bi-gear me-3"></i>Option
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item"
+                                            <li>
+                                                <a class="dropdown-item"
                                                     href="{{ route('pemakaian.edit', ['id' => $d->id]) }}"><i
                                                         class="bi bi-pen me-2"></i>Edit</a>
                                             </li>

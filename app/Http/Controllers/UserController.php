@@ -30,9 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = Auth::user()->name;
         return view('user.create',[
-            'user' => $user
         ]);
     }
 

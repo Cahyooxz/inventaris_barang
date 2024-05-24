@@ -1,22 +1,26 @@
 <?php
 
 namespace App\Exports;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class InventarisExport implements FromCollection, WithHeadings
+class InventarisExport implements FromCollection, WithHeadings,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Barang::join('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
-        ->join('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
+        return Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
+        ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
+        ->join('users','users.id','=','data_pemakaian.pemakai')
         ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
-        ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',Barang::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','data_pemakaian.pemakai','data_pemakaian.ruang_id')->get();
+        ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
+        
     }
     public function headings(): array
     {
@@ -29,5 +33,14 @@ class InventarisExport implements FromCollection, WithHeadings
             'Nama Pemakai',
             'Ruangan',
         ];
+    }
+    public function styles(Worksheet $sheet)
+    {
+        $sheet->getStyle('A1:G1')->getFont()->setBold(true);
+        $sheet->getStyle('A:G')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        // size sesuai value
+        foreach (range('A', 'G') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
     }
 }

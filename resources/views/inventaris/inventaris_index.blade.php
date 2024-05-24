@@ -10,7 +10,7 @@
                 <h6 class="card-subtitle text-muted">
                 </h6>
                 <div class="d-flex mt-3">
-                    <a href="{{ route('barang.index') }}" class="btn btn-success"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
+                    <a href="{{ route('inventaris.download') }}" class="btn btn-success ms-auto"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
                 </div>
             </div>
             <div class="card-body">
@@ -26,7 +26,6 @@
                                 <th>Tanggal Pemakaian</th>
                                 <th>Nama Pemakai</th>
                                 <th>Ruangan</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,15 +37,13 @@
                                     <td>{{ $d->jumlah }}</td>
                                     <td>{{ $d->tanggal_pembelian }}</td>
                                     <td>{{ $d->tanggal_pemakaian }}</td>
-                                    <td>{{ $d->pemakai }}</td>
-                                    <td>{{ $d->ruang_id }}</td>
+                                    <td>{{ $d->name }}</td>
                                     <td>
-                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="bi bi-gear me-3"></i>Option
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                        </ul>
+                                        @if($d->nama_ruangan)
+                                            {{ $d->nama_ruangan }}
+                                        @else
+                                            N/A
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

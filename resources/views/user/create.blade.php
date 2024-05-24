@@ -22,6 +22,7 @@
                                 @error('role')
                                     <small class="text-danger mb-3 d-block">{{ $message }}</small>
                                 @enderror
+                                
                                 <label for="" class="fw-medium mb-2 mt-2">Name</label>
                                 <input type="text" name="name" class="form-control mb-3" placeholder="Nama Lengkap"
                                     value="{{ old('name') }}">

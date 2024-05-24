@@ -1,8 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Exports\InventarisExport;
 use App\Models\Barang;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventarisController extends Controller
 {
@@ -11,10 +13,11 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $data = Barang::join('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
-                ->join('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
+        $data = Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
+                ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
+                ->join('users','users.id','=','data_pemakaian.pemakai')
                 ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
-                ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',Barang::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','data_pemakaian.pemakai','data_pemakaian.ruang_id')->get();
+                ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
 
         return view('inventaris.inventaris_index',[
             'data' => $data
@@ -42,7 +45,6 @@ class InventarisController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -67,5 +69,8 @@ class InventarisController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function download(){
+        return Excel::download(new InventarisExport,'invetaris.xlsx');
     }
 }

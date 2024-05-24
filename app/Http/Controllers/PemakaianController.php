@@ -196,6 +196,8 @@ class PemakaianController extends Controller
             $barang->save();
             $data->delete();
             return redirect()->route('pemakaian.index')->with('success-delete', 'Data barang '.$barang->nama_barang.' berhasil dihapus!');
+        }else{
+            return redirect()->route('pemakaian.index')->with('fail', 'Data barang gagal dihapus!');
         }
     }
 
