@@ -73,7 +73,7 @@ class PembelianController extends Controller
                     'jumlah' => $barang->jumlah + $request->jumlah
                     ]);
                 }
-                return redirect()->route('pembelian.index')->with('success', 'Data barang berhasil disimpan');
+                return redirect()->route('pembelian.index')->with('success', 'Data pembelian barang berhasil disimpan!');
             }
             return redirect()->back();
              // barang baru 
@@ -115,9 +115,9 @@ class PembelianController extends Controller
                 // menambahkan jumlah di table barang berdasarkan jumlah pembelian di table data_pembelian
                 $data_barang = Barang::where('kode_barang', $barang->kode_barang)->first();
                 if(BarangPembelian::create($pembelian)){
-                    return redirect()->route('pembelian.index')->with('success', 'Data barang berhasil disimpan');
+                    return redirect()->route('pembelian.index')->with('success', 'Data pembelian barang '.$data_barang->nama_barang.' berhasil disimpan!');
                 }
-            return redirect()->route('pembelian.index')->with('success','Data barang '.$data['nama_barang'].' berhasil disimpan!');
+            return redirect()->route('pembelian.index')->with('success','Data pembelian barang '.$data_barang->nama_barang.' berhasil disimpan!');
             }else{
                 return redirect()->back();
             }
@@ -174,7 +174,7 @@ class PembelianController extends Controller
             $barang->jumlah = $barang->jumlah + $request->jumlah;
             if($barang->jumlah){
                 $barang->save();
-                return redirect()->route('pembelian.index')->with('success-update', 'Data berhasil diedit');
+                return redirect()->route('pembelian.index')->with('success-update', 'Data pembelian '.$barang->nama_barang.' berhasil diedit!');
             }
         }
     }
@@ -192,7 +192,7 @@ class PembelianController extends Controller
 
         $hapus = $data->delete();
         if($hapus){
-            return redirect()->route('pembelian.index')->with('success-delete','Data barang berhasil dihapus');
+            return redirect()->route('pembelian.index')->with('success-delete','Data pembelian barang '.$barang->nama_barang.' berhasil dihapus!');
         }
         // $data_delete = $data->delete();
     }

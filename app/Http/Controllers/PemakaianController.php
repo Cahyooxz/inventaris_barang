@@ -102,7 +102,7 @@ class PemakaianController extends Controller
                 $barang->update([
                     'jumlah' => $barang->jumlah - $data['jumlah']
                 ]);
-                return redirect()->route('pemakaian.index')->with('success', 'Data berhasil ditambahkan');
+                return redirect()->route('pemakaian.index')->with('success', 'Data pemakaian '.$barang->nama_barang.' berhasil ditambahkan!');
             }
         // jika request pemakaian melebihi stok di data barang maka dia redirect gagal
         } else{
@@ -182,7 +182,7 @@ class PemakaianController extends Controller
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal,
         ]);
-        return redirect()->route('pemakaian.index')->with('success-update', 'Data barang '.$barang->nama_barang.' berhasil diedit');
+        return redirect()->route('pemakaian.index')->with('success-update', 'Data pemakaian barang '.$barang->nama_barang.' berhasil diedit!');
 
     }
 
@@ -198,7 +198,7 @@ class PemakaianController extends Controller
         if($barang->jumlah){
             $barang->save();
             $data->delete();
-            return redirect()->route('pemakaian.index')->with('success-delete', 'Data barang '.$barang->nama_barang.' berhasil dihapus!');
+            return redirect()->route('pemakaian.index')->with('success-delete', 'Data pemakaian barang '.$barang->nama_barang.' berhasil dihapus!');
         }else{
             return redirect()->route('pemakaian.index')->with('fail', 'Data barang gagal dihapus!');
         }

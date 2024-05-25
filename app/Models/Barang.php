@@ -41,11 +41,12 @@ class Barang extends Model
         static::updated(function ($barang) {
             if ($barang->isDirty('harga')) {
                 $pembelian = BarangPembelian::where('kode_barang', $barang->kode_barang)->first();
-
-                $pembelian->update([
-                    'harga' => $barang->harga,
-                    'total' => $barang->harga * $pembelian->jumlah,
-                ]);
+                if(!$pembelian !== null){
+                    $pembelian->update([
+                        'harga' => $barang->harga,
+                        'total' => $barang->harga * $pembelian->jumlah,
+                    ]);
+                }
             }
         });
     }

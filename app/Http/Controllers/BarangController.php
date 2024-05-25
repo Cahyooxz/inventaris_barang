@@ -112,14 +112,16 @@ class BarangController extends Controller
         ],
         [
             'harga.required' => 'Harga barang wajib diisi',
+            'harga.integer' => 'Harga barang berisi angka',
         ]);
         
         $barang_update = $barang->update([
+            'kode_barang' => $barang->kode_barang,
             'harga' => $request->harga,
         ]);
 
         if($barang_update){
-            return redirect()->route('barang.index')->with('success-update', 'Data barang '.$barang->nama_barang.' berhasil diedit');
+            return redirect()->route('barang.index')->with('success-update', 'Data barang '.$barang->nama_barang.' berhasil diedit!');
         }
     }
 
@@ -131,6 +133,6 @@ class BarangController extends Controller
         $data = Barang::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('barang.index')->with('success-delete', 'Data berhasil dihapus');
+        return redirect()->route('barang.index')->with('success-delete', 'Data barang '.$data->nama_barang.' berhasil dihapus!');
     }
 }
