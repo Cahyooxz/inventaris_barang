@@ -10,7 +10,7 @@
                 <h6 class="card-subtitle text-muted">
                 </h6>
                 <div class="d-flex mt-3">
-                    <a href="{{ route('inventaris.download') }}" class="btn btn-success ms-auto"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
+                    <a href="{{ route('inventaris_barang.download') }}" class="btn btn-success ms-auto"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
                 </div>
             </div>
             <div class="card-body">

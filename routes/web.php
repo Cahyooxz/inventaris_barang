@@ -79,7 +79,9 @@ Route::middleware(['auth','verified','role:admin'])->prefix('ruangan')->group(fu
 });
 
 Route::middleware(['auth','verified','role:admin'])->prefix('inventaris')->group(function(){
+    Route::get('/', [InventarisController::class,'index'])->name('inventaris.index');
     Route::get('/download', [InventarisController::class,'download'])->name('inventaris.download');
+    Route::get('/download/inventaris-barang', [InventarisController::class,'downloadBarang'])->name('inventaris_barang.download');
 });
 
 Route::middleware('auth')->group(function () {

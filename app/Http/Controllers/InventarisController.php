@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Exports\InventarisBarangExport;
 use App\Exports\InventarisExport;
 use App\Models\Barang;
 use Illuminate\Support\Facades\DB;
@@ -13,16 +14,16 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        // $data = Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
-        //         ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
-        //         ->Leftjoin('users','users.id','=','data_pemakaian.pemakai')
-        //         ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
-        //         ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
+        $data = Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
+                ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
+                ->Leftjoin('users','users.id','=','data_pemakaian.pemakai')
+                ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
+                ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
 
-        // return view('inventaris.inventaris_index',[
-        //     // 'data' => $data,
-        //     // 'title' => 'Inventaris Data Barang',
-        // ]);
+        return view('inventaris.inventaris_index',[
+            'data' => $data,
+            'title' => 'Inventaris Data Barang',
+        ]);
     }
 
     /**
@@ -73,5 +74,8 @@ class InventarisController extends Controller
     }
     public function download(){
         return Excel::download(new InventarisExport,'inventaris.xlsx');
+    }
+    public function downloadBarang(){
+        return Excel::download(new InventarisBarangExport,'inventaris_barang.xlsx');
     }
 }

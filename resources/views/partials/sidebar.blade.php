@@ -52,8 +52,16 @@
                             Data Pemakaian
                         </a>
                     </li>
-                @endif
-              </ul>
+                    @endif
+                </ul>
+                @if(auth()->user()->hasRole('admin'))
+                <li>
+                    <a href="{{ route('inventaris.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-box-archive pe-2"></i>
+                        Data Inventaris Barang
+                    </a>
+                </li>
+              @endif
           </li>
       </ul>
   </div>
