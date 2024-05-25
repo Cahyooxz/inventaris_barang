@@ -18,7 +18,23 @@ class BarangSeeder extends Seeder
             'nama_barang' => 'Kompor',
             'jenis_barang' => 'Peralatan Rumah Tangga',
             'merk' => 'Cap Kaki Nyamuk',
-            'harga' => 1000,
+            'harga' => 200000,
+            'jumlah' => 0,
+        ]);
+        $barang_2 = Barang::create([
+            'kode_barang' => 'K-002',
+            'nama_barang' => 'Televisi',
+            'jenis_barang' => 'Elektronik',
+            'merk' => 'Samsung',
+            'harga' => 3000000,
+            'jumlah' => 0,
+        ]);
+        $barang_3 = Barang::create([
+            'kode_barang' => 'K-003',
+            'nama_barang' => 'Pensil',
+            'jenis_barang' => 'Alat Tulis',
+            'merk' => 'Faber Casstle',
+            'harga' => 4000,
             'jumlah' => 0,
         ]);
     }
