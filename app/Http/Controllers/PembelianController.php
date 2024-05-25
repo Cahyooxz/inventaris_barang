@@ -187,13 +187,16 @@ class PembelianController extends Controller
         $data = BarangPembelian::findOrFail($id);
         $barang = Barang::where('kode_barang', $data->kode_barang)->first();
 
-        $barang->jumlah = $barang->jumlah - $data->jumlah;
-        $barang->save();
-
-        $hapus = $data->delete();
-        if($hapus){
-            return redirect()->route('pembelian.index')->with('success-delete','Data pembelian barang '.$barang->nama_barang.' berhasil dihapus!');
+        if($barang->jumlah > $data->jumlah){
+            $barang->jumlah = $barang->jumlah - $data->jumlah;
+            $barang->save();
+    
+            $hapus = $data->delete();
+            if($hapus){
+                return redirect()->route('pembelian.index')->with('success-delete','Data pembelian barang '.$barang->nama_barang.' berhasil dihapus!');
+            }
         }
-        // $data_delete = $data->delete();
+        return redirect()->route('pembelian.index')->with('fail','Jumlah Data Barang Kurang');
+
     }
 }

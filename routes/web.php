@@ -74,11 +74,11 @@ Route::middleware(['auth','verified','role:admin'])->prefix('ruangan')->group(fu
     Route::post('/create/add', [RuanganController::class,'store'])->name('ruangan.store');
     Route::get('/edit/{id}', [RuanganController::class,'edit'])->name('ruangan.edit');
     Route::put('/edit/{id}/update', [RuanganController::class,'update'])->name('ruangan.update');
-    Route::delete('/delete/{id}/', [RuanganController::class,'destroy'])->name('ruangan.destroy');
+    Route::delete('/delete/{id}/', [RuanganController::class,'destroy'])->name ('ruangan.destroy');
+    Route::get('/download', [RuanganController::class,'download'])->name ('ruangan.download');
 });
 
 Route::middleware(['auth','verified','role:admin'])->prefix('inventaris')->group(function(){
-    Route::get('/', [InventarisController::class,'index'])->name('inventaris.index');
     Route::get('/download', [InventarisController::class,'download'])->name('inventaris.download');
 });
 

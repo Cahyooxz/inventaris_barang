@@ -11,7 +11,7 @@
                 </h6>
                 <div class="d-flex mt-3">
                     <a href="{{ route('ruangan.create') }}" class="btn-b text-decoration-none p-0 m-0 py-2 px-3 rounded text-light ms-auto me-3"><i class="bi bi-plus-circle me-3"></i>Tambah Ruangan</a>
-                    <a href="{{ route('download-barang') }}" class="btn btn-success"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
+                    <a href="{{ route('ruangan.download') }}" class="btn btn-success"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
                 </div>
             </div>
             <div class="card-body">

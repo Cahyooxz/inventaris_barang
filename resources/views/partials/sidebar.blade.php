@@ -55,14 +55,6 @@
                 @endif
               </ul>
           </li>
-          @if(auth()->user()->hasRole('admin'))
-            <li>
-                <a href="{{ route('inventaris.index') }}" class="sidebar-link">
-                    <i class="fa-solid fa-box-archive pe-2"></i>
-                    Data Inventaris Barang
-                </a>
-            </li>
-          @endif
       </ul>
   </div>
 </aside>

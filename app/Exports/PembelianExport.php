@@ -6,9 +6,10 @@ use App\Models\BarangPembelian;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PembelianExport implements FromCollection, WithHeadings, WithStyles
+class PembelianExport implements FromCollection, WithHeadings, WithStyles, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -40,5 +41,8 @@ class PembelianExport implements FromCollection, WithHeadings, WithStyles
         foreach (range('A', 'E') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
+    }
+    public function title() : string{
+        return 'Data Pembelian';
     }
 }

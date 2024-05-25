@@ -7,8 +7,9 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class PemakaianExport implements FromCollection, WithHeadings, WithStyles
+class PemakaianExport implements FromCollection, WithHeadings, WithStyles, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -43,5 +44,7 @@ class PemakaianExport implements FromCollection, WithHeadings, WithStyles
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
     }
-
+    public function title() : string{
+        return 'Data Pemakaian';
+    }
 }

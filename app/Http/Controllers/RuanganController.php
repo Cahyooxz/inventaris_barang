@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\RuanganExport;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RuanganController extends Controller
 {
@@ -66,5 +69,8 @@ class RuanganController extends Controller
 
         $ruangan->delete();
         return redirect()->route('ruangan.index')->with('success-delete','Data ruangan '.$ruangan->nama_ruangan.' berhasil dihapus!');
+    }
+    public function download() {
+        return Excel::download(new RuanganExport, 'ruangan.xlsx');
     }
 }

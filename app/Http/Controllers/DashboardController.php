@@ -64,6 +64,16 @@ class DashboardController extends Controller
             'pemakaian' => $pemakaians,
         ]);
 
+        $pembelian = BarangPembelian::join('barang', 'barang.kode_barang', '=', 'data_pembelian.kode_barang')
+        ->select('data_pembelian.id','barang.nama_barang','barang.merk','data_pembelian.jumlah','data_pembelian.harga','data_pembelian.total')
+        ->get();
+
+        $pemakaian = Pemakaian::join('barang', 'barang.kode_barang','=','data_pemakaian.kode_barang')
+        ->join('users','users.id','=','data_pemakaian.pemakai')
+        ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
+        ->select('data_pemakaian.id','barang.nama_barang','barang.merk','users.name','users.role','data_pemakaian.jumlah','data_pemakaian.tanggal','ruangan.nama_ruangan')
+        ->get();
+
         return view('dashboard',[
             'user' => $user,
             'total_pembelian' => $totalPembelian,
@@ -71,6 +81,8 @@ class DashboardController extends Controller
             'status' => $status,
             'persen' => $persen_format,
             'data' => $data,
+            'pembelian' => $pembelian,
+            'pemakaian' => $pemakaian,
             'title' => 'Dashboard',
         ]);
     }

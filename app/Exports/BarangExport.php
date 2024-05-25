@@ -6,9 +6,10 @@ use App\Models\Barang;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class BarangExport implements FromCollection, WithHeadings, WithStyles
+class BarangExport implements FromCollection, WithHeadings, WithStyles, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -36,5 +37,8 @@ class BarangExport implements FromCollection, WithHeadings, WithStyles
         foreach (range('A', 'F') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
+    }
+    public function title(): string{
+        return 'Data Barang';
     }
 }

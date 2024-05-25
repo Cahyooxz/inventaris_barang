@@ -15,20 +15,14 @@ class InventarisController extends Controller
     {
         // $data = Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
         //         ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
-        //         ->join('users','users.id','=','data_pemakaian.pemakai')
+        //         ->Leftjoin('users','users.id','=','data_pemakaian.pemakai')
         //         ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
         //         ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
 
-        $data = Barang::Leftjoin('data_pembelian','data_pembelian.kode_barang','=','barang.kode_barang')
-                ->Leftjoin('data_pemakaian','data_pemakaian.kode_barang','=','barang.kode_barang')
-                ->Leftjoin('users','users.id','=','data_pemakaian.pemakai')
-                ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
-                ->select('barang.kode_barang','barang.jenis_barang','barang.jumlah',DB::raw("DATE_FORMAT(data_pembelian.created_at, '%Y-%m-%d') as tanggal_pembelian"),'data_pemakaian.tanggal as tanggal_pemakaian','users.name','ruangan.nama_ruangan')->get();
-
-        return view('inventaris.inventaris_index',[
-            'data' => $data,
-            'title' => 'Inventaris Data Barang',
-        ]);
+        // return view('inventaris.inventaris_index',[
+        //     // 'data' => $data,
+        //     // 'title' => 'Inventaris Data Barang',
+        // ]);
     }
 
     /**
