@@ -5,92 +5,64 @@
           <a href="#">CV Ogah Rugi</a>
       </div>
       <ul class="sidebar-nav">
-          {{-- <li class="sidebar-header">
-              Admin Elements
-          </li> --}}
           <li class="sidebar-item">
-              <a href="#" class="sidebar-link">
+              <a href="{{ route('dashboard') }}" class="sidebar-link">
                   <i class="fa-solid fa-list pe-2"></i>
                   Dashboard
               </a>
           </li>
+          @if(auth()->user()->hasRole('admin'))
           <li class="sidebar-item">
-              <a href="#" class="sidebar-link">
-                <i class="fa-solid fa-cart-shopping pe-2"></i>
-                  Data Pembelian
+              <a href="{{ route('users.index') }}" class="sidebar-link">
+                <i class="bi bi-people-fill pe-2"></i>
+                  Users
               </a>
           </li>
+          @endif
+          <li class="sidebar-item">
+              <a href="{{ route('barang.index') }}" class="sidebar-link">
+                <i class="fa-solid fa-box pe-2"></i>
+                  Data Barang
+              </a>
+          </li>
+          @if(auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('ruangan.index') }}" class="sidebar-link">
+                    <i class="fa-solid fa-house-chimney-window pe-2"></i>
+                    Data Ruangan
+                </a>
+            </li>
+          @endif
           <li class="sidebar-item">
               <a href="#" class="sidebar-link collapsed" data-bs-target="#pages"
-                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
-                  Pages
+                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-people-carry-box pe-2"></i>
+                  Transaksi
               </a>
               <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Page 1</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Page 2</a>
-                  </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('pembelian.index') }}" class="sidebar-link">
+                      <i class="fa-solid fa-cart-shopping pe-2"></i>
+                        Data Pembelian
+                    </a>
+                </li>
+                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('operator'))
+                    <li class="sidebar-item">
+                        <a href="{{ route('pemakaian.index') }}" class="sidebar-link">
+                            <i class="fa-solid fa-people-carry-box pe-2"></i>
+                            Data Pemakaian
+                        </a>
+                    </li>
+                @endif
               </ul>
           </li>
-          <li class="sidebar-item">
-              <a href="#" class="sidebar-link collapsed" data-bs-target="#posts"
-                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
-                  Posts
-              </a>
-              <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Post 1</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Post 2</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Post 3</a>
-                  </li>
-              </ul>
-          </li>
-          <li class="sidebar-item">
-              <a href="#" class="sidebar-link collapsed" data-bs-target="#auth"
-                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
-                  Auth
-              </a>
-              <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Login</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Register</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link">Forgot Password</a>
-                  </li>
-              </ul>
-          </li>
-          <li class="sidebar-header">
-              Multi Level Menu
-          </li>
-          <li class="sidebar-item">
-              <a href="#" class="sidebar-link collapsed" data-bs-target="#multi"
-                  data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
-                  Multi Dropdown
-              </a>
-              <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a href="#" class="sidebar-link collapsed" data-bs-target="#level-1"
-                          data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
-                      <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
-                          <li class="sidebar-item">
-                              <a href="#" class="sidebar-link">Level 1.1</a>
-                          </li>
-                          <li class="sidebar-item">
-                              <a href="#" class="sidebar-link">Level 1.2</a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
+          @if(auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('inventaris.index') }}" class="sidebar-link">
+                    <i class="fa-solid fa-box-archive pe-2"></i>
+                    Data Inventaris Barang
+                </a>
+            </li>
+          @endif
       </ul>
   </div>
 </aside>

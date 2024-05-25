@@ -1,8 +1,110 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="dashboard-content container-fluid mt-3">
         <div class="mb-3">
+            @if(auth()->user()->role === 'admin')
             <h4>Admin Dashboard</h4>
+            @elseif(auth()->user()->role === 'operator')
+            <h4>Operator Dashboard</h4>
+            @elseif(auth()->user()->role === 'petugas')
+            <h4>Petugas Dashboard</h4>
+            @endif
+        </div>
+        <div class="row mt-5">
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('operator'))
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"><i class="bi bi-people-fill"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data User</h5>
+                                        <h1 class="fw-bold">{{ $data['user'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"><i class="fa-solid fa-boxes-stacked"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data Barang</h5>
+                                        <h1 class="fw-bold">{{ $data['barang'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"><i class="fa-solid fa-cart-shopping"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data Pembelian</h5>
+                                        <h1 class="fw-bold">{{ $data['pembelian'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"> <i class="fa-solid fa-people-carry-box"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data Pemakaian</h5>
+                                        <h1 class="fw-bold">{{ $data['pemakaian'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if(auth()->user()->hasRole('petugas'))
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"><i class="fa-solid fa-boxes-stacked"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data Barang</h5>
+                                        <h1 class="fw-bold">{{ $data['barang'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card card-dashboard bg-gray text-light">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h4 class="a-icon"><i class="fa-solid fa-cart-shopping"></i></h4>
+                                    <div class="ms-5 d-flex flex-column gap-3">
+                                        <h5 class="fw-medium">Data Pembelian</h5>
+                                        <h1 class="fw-bold">{{ $data['pembelian'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-12 col-md-6 d-flex">
@@ -12,7 +114,7 @@
                             <div class="col-6">
                                 <div class="p-3 m-1">
                                     <h4>Welcome Back, {{ $user }}</h4>
-                                    <p class="mb-0">Admin Dashboard</p>
+                                    <p class="mb-0">Dashboard {{ auth()->user()->role }}</p>
                                 </div>
                             </div>
                             <div class="col-6 align-self-end text-end p-0">
@@ -28,14 +130,14 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-grow-1">
                                 <h4 class="mb-2">
-                                    $ 78.00
+                                    Rp. {{ number_format($total_pembelian, 0, ',', '.') }}
                                 </h4>
                                 <p class="mb-2">
-                                    Total Earnings
+                                    Total Purchases This Month  
                                 </p>
                                 <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
+                                    <span class="badge text-{{ $status == 'naik' || $status == 'tidak berubah' ? 'success' : 'danger' }} me-2">
+                                        {{ $persen }}%
                                     </span>
                                     <span class="text-muted">
                                         Since Last Month
@@ -44,58 +146,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- Table Element -->
-        <div class="card border-0">
-            <div class="card-header pb-3">
-                <h5 class="card-title">
-                    Basic Table
-                </h5>
-                <h6 class="card-subtitle text-muted">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-                    necessitatibus reprehenderit itaque!
-                </h6>
-                <div class="d-flex">
-                    <a href="{{ route('dashboard.create') }}" class="btn-b text-decoration-none p-0 m-0 py-2 px-2 rounded text-light mt-3"><i class="bi bi-plus-circle me-3 "></i>Tambah User</a>
-                    <a href="{{ route('download') }}" class="btn btn-success mt-3 ms-auto"><i class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Username</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $d)
-                                <tr>
-                                    <td>{{ $d->username }}</td>
-                                    <td>{{ $d->name }}</td>
-                                    <td>{{ $d->email }}</td>
-                                    <td>{{ $d->role }}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-gear me-3"></i>Option
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="#"><i class="bi bi-pen me-2"></i>Edit</a></li>
-                                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3 me-2"></i>Delete</a></li>
-                                        </ul>
-                                      </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
