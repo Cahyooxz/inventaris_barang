@@ -44,35 +44,83 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'kode_barang' => 'required',
-            'jumlah' => 'required|integer',
-        ],
-        [
-            'kode_barang.required' => 'Pilih Barang terlebih dahulu',
-            'jumlah.required' => 'Jumlah Barang wajib diisi',
-            'jumlah.integer' => 'Jumlah Barang wajib berisi angka',
-        ]
-        );
-
-        $barang = Barang::where('kode_barang', $request->kode_barang)->first();
-
-        $pembelian = [
-            'kode_barang' => $request->kode_barang,
-            'jumlah' => $request->jumlah,
-            'harga' => $barang->harga,
-            'total' => $barang->harga * $request->jumlah,
-        ];
-
-        // menambahkan jumlah di table barang berdasarkan jumlah pembelian di table data_pembelian
-        $barang = Barang::where('kode_barang', $request['kode_barang'])->first();
-        if(BarangPembelian::create($pembelian)){
-            if($request->kode_barang === $barang->kode_barang){
-                $barang->update([
-                'jumlah' => $barang->jumlah + $request->jumlah
-                ]);
+        // barang yang sudah ada di data barang
+        if($request->kode_barang){
+            $this->validate($request,[
+                'kode_barang' => 'required',
+                'jumlah' => 'required|integer',
+            ],
+            [
+                'kode_barang.required' => 'Pilih Barang terlebih dahulu',
+                'jumlah.required' => 'Jumlah Barang wajib diisi',
+                'jumlah.integer' => 'Jumlah Barang wajib berisi angka',
+            ]);
+    
+            $barang = Barang::where('kode_barang', $request->kode_barang)->first();
+    
+            $pembelian = [
+                'kode_barang' => $request->kode_barang,
+                'jumlah' => $request->jumlah,
+                'harga' => $barang->harga,
+                'total' => $barang->harga * $request->jumlah,
+            ];
+    
+            // menambahkan jumlah di table barang berdasarkan jumlah pembelian di table data_pembelian
+            $barang = Barang::where('kode_barang', $request['kode_barang'])->first();
+            if(BarangPembelian::create($pembelian)){
+                if($request->kode_barang === $barang->kode_barang){
+                    $barang->update([
+                    'jumlah' => $barang->jumlah + $request->jumlah
+                    ]);
+                }
+                return redirect()->route('pembelian.index')->with('success', 'Data barang berhasil disimpan');
             }
-            return redirect()->route('pembelian.index')->with('success', 'Data barang berhasil disimpan');
+            return redirect()->back();
+             // barang baru 
+        }elseif($request->nama_barang){
+            $this->validate($request, [
+                'nama_barang' => 'required',
+                'jenis_barang' => 'required',
+                'merk' => 'required',
+                'jumlah' => 'required',
+                'harga' => 'required',
+            ],[
+                // 'kode_barang.required' => 'Data kode barang wajib Diisi',
+                'nama_barang.required' => 'Nama barang wajib diisi',
+                'jenis_barang.required' => 'Jenis barang wajib diisi',
+                'merk.required' => 'Merk barang wajib diisi',
+                'jumlah.required' => 'Jumlah barang wajib diisi',
+                'harga.required' => 'Harga barang wajib diisi',
+            ]);
+
+            $data = ([
+                // 'kode_barang' => $request->kode_barang,
+                'nama_barang' => $request->nama_barang,
+                'jenis_barang' => $request->jenis_barang,
+                'merk' => $request->merk,
+                'jumlah' => $request->jumlah,
+                'harga' => $request->harga,
+            ]);
+    
+            if($tambah_barang = Barang::create($data)){
+                $barang = Barang::orderBy('kode_barang','desc')->first();
+                
+                $pembelian = [
+                    'kode_barang' => $barang->kode_barang,
+                    'jumlah' => $request->jumlah,
+                    'harga' => $request->harga,
+                    'total' => $barang->harga * $request->jumlah,
+                ];
+        
+                // menambahkan jumlah di table barang berdasarkan jumlah pembelian di table data_pembelian
+                $data_barang = Barang::where('kode_barang', $barang->kode_barang)->first();
+                if(BarangPembelian::create($pembelian)){
+                    return redirect()->route('pembelian.index')->with('success', 'Data barang berhasil disimpan');
+                }
+            return redirect()->route('pembelian.index')->with('success','Data barang '.$data['nama_barang'].' berhasil disimpan!');
+            }else{
+                return redirect()->back();
+            }
         }
     }
 

@@ -57,8 +57,7 @@ class BarangController extends Controller
             'merk.required' => 'Merk barang wajib diisi',
             'jumlah.required' => 'Jumlah barang wajib diisi',
             'harga.required' => 'Harga barang wajib diisi',
-        ]
-    );
+        ]);
 
         $data = ([
             // 'kode_barang' => $request->kode_barang,
