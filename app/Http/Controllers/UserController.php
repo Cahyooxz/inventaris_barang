@@ -19,6 +19,7 @@ class UserController extends Controller
         $data = User::all();
         return view('user.index',[
             'data' => $data,
+            'title' => 'Data Users',
         ]);
     }
     public function download(){
@@ -31,6 +32,7 @@ class UserController extends Controller
     public function create()
     {
         return view('user.create',[
+            'title' => 'Tambah Data Users',
         ]);
     }
 
@@ -45,6 +47,16 @@ class UserController extends Controller
             'email' => 'required|unique:users,email',
             'password' => 'required|min:6',
             'role' =>'required',
+        ],[
+            'name.required' => 'Nama wajib diisi',
+            'name.min' => 'Nama minimal berisi :min character',
+            'username.required' => 'Username wajib diisi',
+            'username.unique' => 'Username sudah ada',
+            'email.required' => 'Email wajib diisi',
+            'email.unique' => 'Email sudah ada',
+            'password.required' => 'Password wajib diisi',
+            'password.min' => 'Password minimal berisi :min character',
+            'role.required' => 'Role wajib diisi',
         ]);
         $data = ([
             'name' => $request->name,
@@ -85,6 +97,7 @@ class UserController extends Controller
         $data = User::findOrFail($id);
         return view('user.edit',[
             'data' => $data,
+            'title' => 'Edit Data Users',
         ]);
     }
 
@@ -101,6 +114,15 @@ class UserController extends Controller
             //  username atau bisa mengedit jika nilainya sama kayak awal data yang ingin di edit
             'email' => 'required|unique:users,password,'.$user->id,
             'role' =>'required',
+        ],
+        [
+            'name.required' => 'Nama wajib diisi',
+            'name.min' => 'Nama minimal berisi :min character',
+            'username.required' => 'Username wajib diisi',
+            'username.unique' => 'Username sudah ada',
+            'email.required' => 'Email wajib diisi',
+            'email.unique' => 'Email sudah ada',
+            'role.required' => 'Role wajib diisi',
         ]);
 
         // update hanya berdasarkan findorfail id

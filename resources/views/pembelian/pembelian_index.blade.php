@@ -17,7 +17,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="table" class="table">
+                    <table id="table-pembelian" class="table">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -11,14 +11,6 @@
                     @method('POST')
                     <div class="container-fluid">
                         <div class="row">
-                          <div class="col-12">
-                            <label for="kode_barang" class="fw-medium mb-2 mt-2">Kode Barang</label>
-                            <input type="text" name="kode_barang" class="form-control mb-3" placeholder="Kode Barang"
-                                value="{{ old('kode_barang') }}">
-                            @error('kode_barang')
-                                <small class="text-danger mb-3 d-block">{{ $message }}</small>
-                            @enderror
-                          </div>
                           <div class="col-6">
                             <label for="nama_barang" class="fw-medium mb-2 mt-2">Nama Barang</label>
                             <input type="text" name="nama_barang" class="form-control mb-3" placeholder="Nama Barang"

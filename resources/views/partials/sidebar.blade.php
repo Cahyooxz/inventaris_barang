@@ -25,12 +25,14 @@
                   Data Barang
               </a>
           </li>
-          <li>
-            <a href="{{ route('ruangan.index') }}" class="sidebar-link">
-                <i class="fa-solid fa-house-chimney-window pe-2"></i>
-                  Data Ruangan
-              </a>
-          </li>
+          @if(auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('ruangan.index') }}" class="sidebar-link">
+                    <i class="fa-solid fa-house-chimney-window pe-2"></i>
+                    Data Ruangan
+                </a>
+            </li>
+          @endif
           <li class="sidebar-item">
               <a href="#" class="sidebar-link collapsed" data-bs-target="#pages"
                   data-bs-toggle="collapse" aria-expanded="false"><i class="fa-solid fa-people-carry-box pe-2"></i>
@@ -53,12 +55,14 @@
                 @endif
               </ul>
           </li>
-          <li>
-            <a href="{{ route('inventaris.index') }}" class="sidebar-link">
-                <i class="fa-solid fa-box-archive pe-2"></i>
-                  Data Inventaris Barang
-              </a>
-          </li>
+          @if(auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('inventaris.index') }}" class="sidebar-link">
+                    <i class="fa-solid fa-box-archive pe-2"></i>
+                    Data Inventaris Barang
+                </a>
+            </li>
+          @endif
       </ul>
   </div>
 </aside>

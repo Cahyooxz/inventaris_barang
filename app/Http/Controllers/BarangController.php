@@ -18,14 +18,23 @@ class BarangController extends Controller
     }
     public function index()
     {
+        $lastBarang = Barang::orderBy('id', 'desc')->first();
+        $lastKode = $lastBarang->kode_barang;
+        $lastNumber = intval(substr($lastKode, 2));
+        $nextNumber = $lastNumber + 1;
+
+        // Format the new kode_barang
         $data = Barang::all();
         return view('barang.barang_index',[
             'data' => $data,
+            'title' => 'Data Barang',
         ]);
     }
     public function create()
     {
-        return view('barang.barang_create');
+        return view('barang.barang_create',[
+            'title' => 'Tambah Data Barang',
+        ]);
     }
     
     /**
@@ -34,27 +43,25 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'kode_barang' => 'required|min:5|unique:barang',
-            'nama_barang' => 'required|unique:barang',
+            // 'kode_barang' => 'required|min:5|unique:barang',
+            'nama_barang' => 'required',
             'jenis_barang' => 'required',
             'merk' => 'required',
             'jumlah' => 'required',
             'harga' => 'required',
         ],
         [
-            'kode_barang.required' => 'Data kode barang wajib Diisi',
-            'kode_barang.min' => 'Data kode barang min',
-            'pemakai.required' => 'Nama pemakai wajib diisi',
-            'jumlah.required' => 'Data jumlah barang wajib diisi',
-            'jumlah.integer' => 'Data jumlah barang harus berisi angka',
-            'jumlah.min' => 'Data jumlah barang minimal :min',
-            'tanggal.required' => 'Tanggal pemakaian wajib diisi',
-            'ruangan_id.exits' => 'Ruangan tidak ditemukan',
+            // 'kode_barang.required' => 'Data kode barang wajib Diisi',
+            'nama_barang.required' => 'Nama barang wajib diisi',
+            'jenis_barang.required' => 'Jenis barang wajib diisi',
+            'merk.required' => 'Merk barang wajib diisi',
+            'jumlah.required' => 'Jumlah barang wajib diisi',
+            'harga.required' => 'Harga barang wajib diisi',
         ]
     );
 
         $data = ([
-            'kode_barang' => $request->kode_barang,
+            // 'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
             'jenis_barang' => $request->jenis_barang,
             'merk' => $request->merk,
@@ -77,6 +84,7 @@ class BarangController extends Controller
         $data = Barang::findOrFail($id);
         return view('barang.barang_show',[
             'data' => $data,
+            'title' => 'Detail Data Barang '.$data->nama_barang,
         ]);
     }
 
@@ -88,6 +96,8 @@ class BarangController extends Controller
         $data = Barang::findOrFail($id);
         return view('barang.barang_edit', [
             'data' => $data,
+            'title' => 'Edit Data Barang '.$data->nama_barang,
+
         ]);
     }
 
@@ -100,6 +110,9 @@ class BarangController extends Controller
 
         $this->validate($request,[
             'harga' => 'required|integer',
+        ],
+        [
+            'harga.required' => 'Harga barang wajib diisi',
         ]);
         
         $barang_update = $barang->update([

@@ -20,6 +20,7 @@ class PembelianController extends Controller
             
         return view('pembelian.pembelian_index',[
             'data' => $data,
+            'title' => 'Data Pembelian Barang',
         ]);
     }
     public function download(){
@@ -34,6 +35,7 @@ class PembelianController extends Controller
         $kode_barang = Barang::select('kode_barang','nama_barang','merk')->get();
         return view('pembelian.pembelian_create',[
             'kode_barang' => $kode_barang,
+            'title' => 'Tambah Data Pembelian Barang',
         ]);
     }
 
@@ -45,7 +47,13 @@ class PembelianController extends Controller
         $this->validate($request,[
             'kode_barang' => 'required',
             'jumlah' => 'required|integer',
-        ]);
+        ],
+        [
+            'kode_barang.required' => 'Pilih Barang terlebih dahulu',
+            'jumlah.required' => 'Jumlah Barang wajib diisi',
+            'jumlah.integer' => 'Jumlah Barang wajib berisi angka',
+        ]
+        );
 
         $barang = Barang::where('kode_barang', $request->kode_barang)->first();
 
@@ -87,6 +95,7 @@ class PembelianController extends Controller
         return view('pembelian.pembelian_edit',[
             'data' => $data,
             'barang' => $barang,
+            'title' => 'Edit Data Pembelian Barang',
         ]);
     }
 
@@ -108,6 +117,9 @@ class PembelianController extends Controller
         $data->update([
             'jumlah' => $request->jumlah,
             'total' => $barang->harga * $request->jumlah,
+        ],[
+            'jumlah.required' => 'Jumlah Barang wajib diisi',
+            'jumlah.integer' => 'Jumlah Barang wajib berisi angka',
         ]);
 
         if($data->update()){

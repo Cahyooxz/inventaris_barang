@@ -19,7 +19,7 @@ class BarangSeeder extends Seeder
             'jenis_barang' => 'Peralatan Rumah Tangga',
             'merk' => 'Cap Kaki Nyamuk',
             'harga' => 1000,
-            'jumlah' => 10,
+            'jumlah' => 0,
         ]);
     }
 }

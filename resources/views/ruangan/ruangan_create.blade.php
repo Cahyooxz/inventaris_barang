@@ -19,7 +19,7 @@
                                 <small class="text-danger mb-3 d-block">{{ $message }}</small>
                             @enderror
                           </div>
-                          <div class="col-12 mt-5">
+                          <div class="col-12 mt-3">
                               <a href="{{ route('barang.index') }}" class="btn btn-secondary me-3">Close</a>
                               <button type="submit" class="btn btn-success">Submit</button>
                           </div>

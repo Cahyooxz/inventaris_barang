@@ -30,6 +30,7 @@ class PemakaianController extends Controller
         [
             'data' => $data,
             'barang' => $barang,
+            'title' => 'Data Pemakaian Barang',
         ]);
     }
 
@@ -47,6 +48,7 @@ class PemakaianController extends Controller
             'user' => $user,
             'barang' => $barang,
             'ruangan' => $ruangan,
+            'title' => 'Tambah Data Pemakaian Barang',
         ]);
     }
 
@@ -134,6 +136,7 @@ class PemakaianController extends Controller
             'user_all' => $user_all,
             'barang' => $barang,
             'ruangan' => $ruangan,
+            'title' => 'Edit Data Pemakaian Barang',
         ]);
     }
 
@@ -162,7 +165,7 @@ class PemakaianController extends Controller
                 'pemakai.required' => 'Nama pemakai wajib diisi',
                 'jumlah.required' => 'Data jumlah barang wajib diisi',
                 'jumlah.integer' => 'Data jumlah barang harus berisi angka',
-                'jumlah.min' => 'Data jumlah barang minal :min',
+                'jumlah.min' => 'Data jumlah barang minimal :min',
                 'tanggal.required' => 'Tanggal pemakaian wajib diisi',
                 'ruangan.exists' => 'Data ruangan tidak ada',
             ]

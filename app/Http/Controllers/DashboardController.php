@@ -71,6 +71,7 @@ class DashboardController extends Controller
             'status' => $status,
             'persen' => $persen_format,
             'data' => $data,
+            'title' => 'Dashboard',
         ]);
     }
 

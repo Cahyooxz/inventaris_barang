@@ -11,17 +11,22 @@ class RuanganController extends Controller
         return view('ruangan.ruangan_index',
         [
             'data' => $ruangan,
+            'title' => 'Data Ruangan',
         ]);
     }
 
     public function create(){
         return view('ruangan.ruangan_create',[
+            'title' => 'Tambah Data Ruangan',
         ]);
     }
     public function store(Request $request){
 
         $this->validate($request,[
             'nama_ruangan' => 'required|unique:ruangan,nama_ruangan'
+        ],[
+            'nama_ruangan.required' => 'Nama Ruangan wajib diisi',
+            'nama_ruangan.unique' => 'Nama Ruangan sudah ada'
         ]);
         $data = [
             'nama_ruangan' => $request->nama_ruangan
@@ -34,7 +39,8 @@ class RuanganController extends Controller
     public function edit(string $id){
         $ruangan = Ruangan::findOrFail($id);
         return view('ruangan.ruangan_edit',[
-            'data' => $ruangan
+            'data' => $ruangan,
+            'title' => 'Edit Data Ruangan',
         ]);
     }
 
@@ -43,6 +49,9 @@ class RuanganController extends Controller
 
         $this->validate($request,[
             'nama_ruangan' => 'required|unique:ruangan,nama_ruangan,'.$ruangan->id
+        ],[
+            'nama_ruangan.required' => 'Nama Ruangan wajib diisi',
+            'nama_ruangan.unique' => 'Nama Ruangan sudah ada'
         ]);
 
         $ruangan->update([

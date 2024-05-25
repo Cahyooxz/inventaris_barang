@@ -26,6 +26,7 @@
                         <h4 class="fw-bold mb-3">Login</h4>
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
+                            <p style="font-size: 12px" class="mt-3 mb-3 ms-auto">CV.Ogah Rugi</p>
                             <label for="Username" class="mt-3 mb-3">Username</label>
                             <input type="text" required class="form-control" autofocus autocomplete="username" name="username">
                             <x-input-error :messages="$errors->get('username')" class="mt-2" />

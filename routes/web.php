@@ -68,7 +68,7 @@ Route::middleware(['auth','verified','role:admin|operator'])->prefix('pemakaian-
     Route::get('/download', [PemakaianController::class,'download'])->name('pemakaian.download');
 });
 
-Route::middleware(['auth','verified','role:admin|operator|petugas'])->prefix('ruangan')->group(function(){
+Route::middleware(['auth','verified','role:admin'])->prefix('ruangan')->group(function(){
     Route::get('/', [RuanganController::class,'index'])->name('ruangan.index');
     Route::get('/create', [RuanganController::class,'create'])->name('ruangan.create');
     Route::post('/create/add', [RuanganController::class,'store'])->name('ruangan.store');
