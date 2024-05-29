@@ -65,6 +65,7 @@ Route::middleware(['auth','verified','role:admin|operator'])->prefix('pemakaian-
     Route::get('/edit/{id}', [PemakaianController::class,'edit'])->name('pemakaian.edit');
     Route::put('/edit/{id}/update', [PemakaianController::class,'update'])->name('pemakaian.update');
     Route::delete('/delete/{id}/', [PemakaianController::class,'destroy'])->name('pemakaian.destroy');
+    Route::get('/laporan', [PemakaianController::class,'laporan'])->name('pemakaian.laporan');
     Route::get('/download', [PemakaianController::class,'download'])->name('pemakaian.download');
 });
 

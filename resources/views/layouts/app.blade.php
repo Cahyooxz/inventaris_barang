@@ -35,7 +35,7 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script>
 
 </head>
-
+@vite(['css/style.css', 'js/script.js'])
 <body class="bg-light">
     @include('partials.notif')
     <div class="wrapper">

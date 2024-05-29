@@ -203,8 +203,28 @@ class PemakaianController extends Controller
             return redirect()->route('pemakaian.index')->with('fail', 'Data barang gagal dihapus!');
         }
     }
-
-    public function download(){
-        return Excel::download(new PemakaianExport, 'data_pemakaian.xlsx');
-    }
+        public function laporan(Request $request)
+        {
+            $from = $request->from;
+            $end = $request->end;
+            $query = Pemakaian::join('barang', 'barang.kode_barang','=','data_pemakaian.kode_barang')
+                ->join('users','users.id','=','data_pemakaian.pemakai')
+                ->leftJoin('ruangan','ruangan.id','=','data_pemakaian.ruang_id')
+                ->select('data_pemakaian.id','barang.nama_barang','barang.merk','users.name','users.role','data_pemakaian.jumlah','data_pemakaian.tanggal','ruangan.nama_ruangan');
+    
+            if ($request->has('from') && $request->has('end')) {
+                $query->whereBetween('data_pemakaian.tanggal', [$from,$end]);
+            }
+            $data = $query->get();
+    
+            return view('pemakaian.pemakaian_laporan', [
+                'title' => 'Laporan Pemakaian',
+                'data' => $data
+            ]);
+        }
+    
+        public function download(Request $request)
+        {
+            return Excel::download(new PemakaianExport($request), 'laporan_pemakaian.xlsx');
+        }
 }

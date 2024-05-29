@@ -13,8 +13,10 @@
                     @if(!$barang->isEmpty())
                     <a href="{{ route('pemakaian.create') }}" class="btn-b text-decoration-none p-0 m-0 py-2 px-3 rounded text-light ms-auto me-3"><i class="bi bi-plus-circle me-3"></i>Tambah Pemakaian</a>
                     @endif
-                    <a href="{{ route('pemakaian.download') }}" class="btn btn-success {{ $barang->isEmpty() ? 'ms-auto' : ''}}"><i
-                            class="bi bi-file-earmark-arrow-down me-3"></i>Download</a>
+                    {{-- <a href="{{ route('pemakaian.download') }}" class="btn btn-success {{ $barang->isEmpty() ? 'ms-auto' : ''}}"><i
+                            class="bi bi-file-earmark-arrow-down me-3"></i>Download</a> --}}
+                    <a href="{{ route('pemakaian.laporan') }}" class="btn btn-success {{ $barang->isEmpty() ? 'ms-auto' : ''}}"><i
+                            class="bi bi-file-earmark-arrow-down me-3"></i>Generate Laporan</a>
                 </div>
             </div>
             <div class="card-body">
